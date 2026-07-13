@@ -1,33 +1,61 @@
-<a href="https://promisesaplus.com/"><img src="https://promisesaplus.com/assets/logo-small.png" align="right" /></a>
+# object-assign [![Build Status](https://travis-ci.org/sindresorhus/object-assign.svg?branch=master)](https://travis-ci.org/sindresorhus/object-assign)
 
-# is-promise
-
-  Test whether an object looks like a promises-a+ promise
-
- [![Build Status](https://img.shields.io/travis/then/is-promise/master.svg)](https://travis-ci.org/then/is-promise)
- [![Dependency Status](https://img.shields.io/david/then/is-promise.svg)](https://david-dm.org/then/is-promise)
- [![NPM version](https://img.shields.io/npm/v/is-promise.svg)](https://www.npmjs.org/package/is-promise)
+> ES2015 [`Object.assign()`](http://www.2ality.com/2014/01/object-assign.html) [ponyfill](https://ponyfill.com)
 
 
+## Use the built-in
 
-## Installation
+Node.js 4 and up, as well as every evergreen browser (Chrome, Edge, Firefox, Opera, Safari),
+support `Object.assign()` :tada:. If you target only those environments, then by all
+means, use `Object.assign()` instead of this package.
 
-    $ npm install is-promise
 
-You can also use it client side via npm.
+## Install
+
+```
+$ npm install --save object-assign
+```
+
+
+## Usage
+
+```js
+const objectAssign = require('object-assign');
+
+objectAssign({foo: 0}, {bar: 1});
+//=> {foo: 0, bar: 1}
+
+// multiple sources
+objectAssign({foo: 0}, {bar: 1}, {baz: 2});
+//=> {foo: 0, bar: 1, baz: 2}
+
+// overwrites equal keys
+objectAssign({foo: 0}, {foo: 1}, {foo: 2});
+//=> {foo: 2}
+
+// ignores null and undefined sources
+objectAssign({foo: 0}, null, {bar: 1}, undefined);
+//=> {foo: 0, bar: 1}
+```
+
 
 ## API
 
-```typescript
-import isPromise from 'is-promise';
+### objectAssign(target, [source, ...])
 
-isPromise(Promise.resolve());//=>true
-isPromise({then:function () {...}});//=>true
-isPromise(null);//=>false
-isPromise({});//=>false
-isPromise({then: true})//=>false
-```
+Assigns enumerable own properties of `source` objects to the `target` object and returns the `target` object. Additional `source` objects will overwrite previous ones.
+
+
+## Resources
+
+- [ES2015 spec - Object.assign](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.assign)
+
+
+## Related
+
+- [deep-assign](https://github.com/sindresorhus/deep-assign) - Recursive `Object.assign()`
+
 
 ## License
 
-  MIT
+MIT © [Sindre Sorhus](https://sindresorhus.com)
