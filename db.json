@@ -1,0 +1,11 @@
+{
+  "appointments": [],
+  "contacts": [],
+  "settings": {
+    "clinicName": "S.N Dental Clinic",
+    "doctorName": "Dr. Srihari",
+    "phone": "+91 98430 22094",
+    "landline": "0422-2541647",
+    "email": "drsrihari@sndental.in"
+  }
+}
