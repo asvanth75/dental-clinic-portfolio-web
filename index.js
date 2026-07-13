@@ -1,192 +1,327 @@
-'use strict';
+/*!
+ * proxy-addr
+ * Copyright(c) 2014-2016 Douglas Christopher Wilson
+ * MIT Licensed
+ */
 
-var test = require('tape');
-var v = require('es-value-fixtures');
-var forEach = require('for-each');
-var inspect = require('object-inspect');
+'use strict'
 
-var abs = require('../abs');
-var floor = require('../floor');
-var isFinite = require('../isFinite');
-var isInteger = require('../isInteger');
-var isNaN = require('../isNaN');
-var isNegativeZero = require('../isNegativeZero');
-var max = require('../max');
-var min = require('../min');
-var mod = require('../mod');
-var pow = require('../pow');
-var round = require('../round');
-var sign = require('../sign');
+/**
+ * Module exports.
+ * @public
+ */
 
-var maxArrayLength = require('../constants/maxArrayLength');
-var maxSafeInteger = require('../constants/maxSafeInteger');
-var maxValue = require('../constants/maxValue');
+module.exports = proxyaddr
+module.exports.all = alladdrs
+module.exports.compile = compile
 
-test('abs', function (t) {
-	t.equal(abs(-1), 1, 'abs(-1) === 1');
-	t.equal(abs(+1), 1, 'abs(+1) === 1');
-	t.equal(abs(+0), +0, 'abs(+0) === +0');
-	t.equal(abs(-0), +0, 'abs(-0) === +0');
+/**
+ * Module dependencies.
+ * @private
+ */
 
-	t.end();
-});
+var forwarded = require('forwarded')
+var ipaddr = require('ipaddr.js')
 
-test('floor', function (t) {
-	t.equal(floor(-1.1), -2, 'floor(-1.1) === -2');
-	t.equal(floor(+1.1), 1, 'floor(+1.1) === 1');
-	t.equal(floor(+0), +0, 'floor(+0) === +0');
-	t.equal(floor(-0), -0, 'floor(-0) === -0');
-	t.equal(floor(-Infinity), -Infinity, 'floor(-Infinity) === -Infinity');
-	t.equal(floor(Number(Infinity)), Number(Infinity), 'floor(+Infinity) === +Infinity');
-	t.equal(floor(NaN), NaN, 'floor(NaN) === NaN');
-	t.equal(floor(0), +0, 'floor(0) === +0');
-	t.equal(floor(-0), -0, 'floor(-0) === -0');
-	t.equal(floor(1), 1, 'floor(1) === 1');
-	t.equal(floor(-1), -1, 'floor(-1) === -1');
-	t.equal(floor(1.1), 1, 'floor(1.1) === 1');
-	t.equal(floor(-1.1), -2, 'floor(-1.1) === -2');
-	t.equal(floor(maxValue), maxValue, 'floor(maxValue) === maxValue');
-	t.equal(floor(maxSafeInteger), maxSafeInteger, 'floor(maxSafeInteger) === maxSafeInteger');
+/**
+ * Variables.
+ * @private
+ */
 
-	t.end();
-});
+var DIGIT_REGEXP = /^[0-9]+$/
+var isip = ipaddr.isValid
+var parseip = ipaddr.parse
 
-test('isFinite', function (t) {
-	t.equal(isFinite(0), true, 'isFinite(+0) === true');
-	t.equal(isFinite(-0), true, 'isFinite(-0) === true');
-	t.equal(isFinite(1), true, 'isFinite(1) === true');
-	t.equal(isFinite(Infinity), false, 'isFinite(Infinity) === false');
-	t.equal(isFinite(-Infinity), false, 'isFinite(-Infinity) === false');
-	t.equal(isFinite(NaN), false, 'isFinite(NaN) === false');
+/**
+ * Pre-defined IP ranges.
+ * @private
+ */
 
-	forEach(v.nonNumbers, function (nonNumber) {
-		t.equal(isFinite(nonNumber), false, 'isFinite(' + inspect(nonNumber) + ') === false');
-	});
+var IP_RANGES = {
+  linklocal: ['169.254.0.0/16', 'fe80::/10'],
+  loopback: ['127.0.0.1/8', '::1/128'],
+  uniquelocal: ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16', 'fc00::/7']
+}
 
-	t.end();
-});
+/**
+ * Get all addresses in the request, optionally stopping
+ * at the first untrusted.
+ *
+ * @param {Object} request
+ * @param {Function|Array|String} [trust]
+ * @public
+ */
 
-test('isInteger', function (t) {
-	forEach([].concat(
-		// @ts-expect-error TS sucks with concat
-		v.nonNumbers,
-		v.nonIntegerNumbers
-	), function (nonInteger) {
-		t.equal(isInteger(nonInteger), false, 'isInteger(' + inspect(nonInteger) + ') === false');
-	});
+function alladdrs (req, trust) {
+  // get addresses
+  var addrs = forwarded(req)
 
-	t.end();
-});
+  if (!trust) {
+    // Return all addresses
+    return addrs
+  }
 
-test('isNaN', function (t) {
-	forEach([].concat(
-		// @ts-expect-error TS sucks with concat
-		v.nonNumbers,
-		v.infinities,
-		v.zeroes,
-		v.integerNumbers
-	), function (nonNaN) {
-		t.equal(isNaN(nonNaN), false, 'isNaN(' + inspect(nonNaN) + ') === false');
-	});
+  if (typeof trust !== 'function') {
+    trust = compile(trust)
+  }
 
-	t.equal(isNaN(NaN), true, 'isNaN(NaN) === true');
+  for (var i = 0; i < addrs.length - 1; i++) {
+    if (trust(addrs[i], i)) continue
 
-	t.end();
-});
+    addrs.length = i + 1
+  }
 
-test('isNegativeZero', function (t) {
-	t.equal(isNegativeZero(-0), true, 'isNegativeZero(-0) === true');
-	t.equal(isNegativeZero(+0), false, 'isNegativeZero(+0) === false');
-	t.equal(isNegativeZero(1), false, 'isNegativeZero(1) === false');
-	t.equal(isNegativeZero(-1), false, 'isNegativeZero(-1) === false');
-	t.equal(isNegativeZero(NaN), false, 'isNegativeZero(NaN) === false');
-	t.equal(isNegativeZero(Infinity), false, 'isNegativeZero(Infinity) === false');
-	t.equal(isNegativeZero(-Infinity), false, 'isNegativeZero(-Infinity) === false');
+  return addrs
+}
 
-	forEach(v.nonNumbers, function (nonNumber) {
-		t.equal(isNegativeZero(nonNumber), false, 'isNegativeZero(' + inspect(nonNumber) + ') === false');
-	});
+/**
+ * Compile argument into trust function.
+ *
+ * @param {Array|String} val
+ * @private
+ */
 
-	t.end();
-});
+function compile (val) {
+  if (!val) {
+    throw new TypeError('argument is required')
+  }
 
-test('max', function (t) {
-	t.equal(max(1, 2), 2, 'max(1, 2) === 2');
-	t.equal(max(1, 2, 3), 3, 'max(1, 2, 3) === 3');
-	t.equal(max(1, 2, 3, 4), 4, 'max(1, 2, 3, 4) === 4');
-	t.equal(max(1, 2, 3, 4, 5), 5, 'max(1, 2, 3, 4, 5) === 5');
-	t.equal(max(1, 2, 3, 4, 5, 6), 6, 'max(1, 2, 3, 4, 5, 6) === 6');
-	t.equal(max(1, 2, 3, 4, 5, 6, 7), 7, 'max(1, 2, 3, 4, 5, 6, 7) === 7');
+  var trust
 
-	t.end();
-});
+  if (typeof val === 'string') {
+    trust = [val]
+  } else if (Array.isArray(val)) {
+    trust = val.slice()
+  } else {
+    throw new TypeError('unsupported trust argument')
+  }
 
-test('min', function (t) {
-	t.equal(min(1, 2), 1, 'min(1, 2) === 1');
-	t.equal(min(1, 2, 3), 1, 'min(1, 2, 3) === 1');
-	t.equal(min(1, 2, 3, 4), 1, 'min(1, 2, 3, 4) === 1');
-	t.equal(min(1, 2, 3, 4, 5), 1, 'min(1, 2, 3, 4, 5) === 1');
-	t.equal(min(1, 2, 3, 4, 5, 6), 1, 'min(1, 2, 3, 4, 5, 6) === 1');
+  for (var i = 0; i < trust.length; i++) {
+    val = trust[i]
 
-	t.end();
-});
+    if (!Object.prototype.hasOwnProperty.call(IP_RANGES, val)) {
+      continue
+    }
 
-test('mod', function (t) {
-	t.equal(mod(1, 2), 1, 'mod(1, 2) === 1');
-	t.equal(mod(2, 2), 0, 'mod(2, 2) === 0');
-	t.equal(mod(3, 2), 1, 'mod(3, 2) === 1');
-	t.equal(mod(4, 2), 0, 'mod(4, 2) === 0');
-	t.equal(mod(5, 2), 1, 'mod(5, 2) === 1');
-	t.equal(mod(6, 2), 0, 'mod(6, 2) === 0');
-	t.equal(mod(7, 2), 1, 'mod(7, 2) === 1');
-	t.equal(mod(8, 2), 0, 'mod(8, 2) === 0');
-	t.equal(mod(9, 2), 1, 'mod(9, 2) === 1');
-	t.equal(mod(10, 2), 0, 'mod(10, 2) === 0');
-	t.equal(mod(11, 2), 1, 'mod(11, 2) === 1');
+    // Splice in pre-defined range
+    val = IP_RANGES[val]
+    trust.splice.apply(trust, [i, 1].concat(val))
+    i += val.length - 1
+  }
 
-	t.end();
-});
+  return compileTrust(compileRangeSubnets(trust))
+}
 
-test('pow', function (t) {
-	t.equal(pow(2, 2), 4, 'pow(2, 2) === 4');
-	t.equal(pow(2, 3), 8, 'pow(2, 3) === 8');
-	t.equal(pow(2, 4), 16, 'pow(2, 4) === 16');
-	t.equal(pow(2, 5), 32, 'pow(2, 5) === 32');
-	t.equal(pow(2, 6), 64, 'pow(2, 6) === 64');
-	t.equal(pow(2, 7), 128, 'pow(2, 7) === 128');
-	t.equal(pow(2, 8), 256, 'pow(2, 8) === 256');
-	t.equal(pow(2, 9), 512, 'pow(2, 9) === 512');
-	t.equal(pow(2, 10), 1024, 'pow(2, 10) === 1024');
+/**
+ * Compile `arr` elements into range subnets.
+ *
+ * @param {Array} arr
+ * @private
+ */
 
-	t.end();
-});
+function compileRangeSubnets (arr) {
+  var rangeSubnets = new Array(arr.length)
 
-test('round', function (t) {
-	t.equal(round(1.1), 1, 'round(1.1) === 1');
-	t.equal(round(1.5), 2, 'round(1.5) === 2');
-	t.equal(round(1.9), 2, 'round(1.9) === 2');
+  for (var i = 0; i < arr.length; i++) {
+    rangeSubnets[i] = parseipNotation(arr[i])
+  }
 
-	t.end();
-});
+  return rangeSubnets
+}
 
-test('sign', function (t) {
-	t.equal(sign(-1), -1, 'sign(-1) === -1');
-	t.equal(sign(+1), +1, 'sign(+1) === +1');
-	t.equal(sign(+0), +0, 'sign(+0) === +0');
-	t.equal(sign(-0), -0, 'sign(-0) === -0');
-	t.equal(sign(NaN), NaN, 'sign(NaN) === NaN');
-	t.equal(sign(Infinity), +1, 'sign(Infinity) === +1');
-	t.equal(sign(-Infinity), -1, 'sign(-Infinity) === -1');
-	t.equal(sign(maxValue), +1, 'sign(maxValue) === +1');
-	t.equal(sign(maxSafeInteger), +1, 'sign(maxSafeInteger) === +1');
+/**
+ * Compile range subnet array into trust function.
+ *
+ * @param {Array} rangeSubnets
+ * @private
+ */
 
-	t.end();
-});
+function compileTrust (rangeSubnets) {
+  // Return optimized function based on length
+  var len = rangeSubnets.length
+  return len === 0
+    ? trustNone
+    : len === 1
+      ? trustSingle(rangeSubnets[0])
+      : trustMulti(rangeSubnets)
+}
 
-test('constants', function (t) {
-	t.equal(typeof maxArrayLength, 'number', 'typeof maxArrayLength === "number"');
-	t.equal(typeof maxSafeInteger, 'number', 'typeof maxSafeInteger === "number"');
-	t.equal(typeof maxValue, 'number', 'typeof maxValue === "number"');
+/**
+ * Parse IP notation string into range subnet.
+ *
+ * @param {String} note
+ * @private
+ */
 
-	t.end();
-});
+function parseipNotation (note) {
+  var pos = note.lastIndexOf('/')
+  var str = pos !== -1
+    ? note.substring(0, pos)
+    : note
+
+  if (!isip(str)) {
+    throw new TypeError('invalid IP address: ' + str)
+  }
+
+  var ip = parseip(str)
+
+  if (pos === -1 && ip.kind() === 'ipv6' && ip.isIPv4MappedAddress()) {
+    // Store as IPv4
+    ip = ip.toIPv4Address()
+  }
+
+  var max = ip.kind() === 'ipv6'
+    ? 128
+    : 32
+
+  var range = pos !== -1
+    ? note.substring(pos + 1, note.length)
+    : null
+
+  if (range === null) {
+    range = max
+  } else if (DIGIT_REGEXP.test(range)) {
+    range = parseInt(range, 10)
+  } else if (ip.kind() === 'ipv4' && isip(range)) {
+    range = parseNetmask(range)
+  } else {
+    range = null
+  }
+
+  if (range <= 0 || range > max) {
+    throw new TypeError('invalid range on address: ' + note)
+  }
+
+  return [ip, range]
+}
+
+/**
+ * Parse netmask string into CIDR range.
+ *
+ * @param {String} netmask
+ * @private
+ */
+
+function parseNetmask (netmask) {
+  var ip = parseip(netmask)
+  var kind = ip.kind()
+
+  return kind === 'ipv4'
+    ? ip.prefixLengthFromSubnetMask()
+    : null
+}
+
+/**
+ * Determine address of proxied request.
+ *
+ * @param {Object} request
+ * @param {Function|Array|String} trust
+ * @public
+ */
+
+function proxyaddr (req, trust) {
+  if (!req) {
+    throw new TypeError('req argument is required')
+  }
+
+  if (!trust) {
+    throw new TypeError('trust argument is required')
+  }
+
+  var addrs = alladdrs(req, trust)
+  var addr = addrs[addrs.length - 1]
+
+  return addr
+}
+
+/**
+ * Static trust function to trust nothing.
+ *
+ * @private
+ */
+
+function trustNone () {
+  return false
+}
+
+/**
+ * Compile trust function for multiple subnets.
+ *
+ * @param {Array} subnets
+ * @private
+ */
+
+function trustMulti (subnets) {
+  return function trust (addr) {
+    if (!isip(addr)) return false
+
+    var ip = parseip(addr)
+    var ipconv
+    var kind = ip.kind()
+
+    for (var i = 0; i < subnets.length; i++) {
+      var subnet = subnets[i]
+      var subnetip = subnet[0]
+      var subnetkind = subnetip.kind()
+      var subnetrange = subnet[1]
+      var trusted = ip
+
+      if (kind !== subnetkind) {
+        if (subnetkind === 'ipv4' && !ip.isIPv4MappedAddress()) {
+          // Incompatible IP addresses
+          continue
+        }
+
+        if (!ipconv) {
+          // Convert IP to match subnet IP kind
+          ipconv = subnetkind === 'ipv4'
+            ? ip.toIPv4Address()
+            : ip.toIPv4MappedAddress()
+        }
+
+        trusted = ipconv
+      }
+
+      if (trusted.match(subnetip, subnetrange)) {
+        return true
+      }
+    }
+
+    return false
+  }
+}
+
+/**
+ * Compile trust function for single subnet.
+ *
+ * @param {Object} subnet
+ * @private
+ */
+
+function trustSingle (subnet) {
+  var subnetip = subnet[0]
+  var subnetkind = subnetip.kind()
+  var subnetisipv4 = subnetkind === 'ipv4'
+  var subnetrange = subnet[1]
+
+  return function trust (addr) {
+    if (!isip(addr)) return false
+
+    var ip = parseip(addr)
+    var kind = ip.kind()
+
+    if (kind !== subnetkind) {
+      if (subnetisipv4 && !ip.isIPv4MappedAddress()) {
+        // Incompatible IP addresses
+        return false
+      }
+
+      // Convert IP to match subnet IP kind
+      ip = subnetisipv4
+        ? ip.toIPv4Address()
+        : ip.toIPv4MappedAddress()
+    }
+
+    return ip.match(subnetip, subnetrange)
+  }
+}
