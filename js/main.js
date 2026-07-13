@@ -1,4 +1,4 @@
-﻿/* =====================================================
+/* =====================================================
    MAIN JS — Global behaviors: nav, scroll, animations,
    WhatsApp widget, back-to-top, page loader
    ===================================================== */
@@ -45,6 +45,7 @@ const navMenu   = document.getElementById('navMenu');
 hamburger?.addEventListener('click', () => {
   hamburger.classList.toggle('open');
   navMenu?.classList.toggle('open');
+  navbar?.classList.toggle('menu-open');
 });
 
 // Close menu on link click
@@ -52,6 +53,7 @@ navMenu?.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', () => {
     hamburger?.classList.remove('open');
     navMenu?.classList.remove('open');
+    navbar?.classList.remove('menu-open');
   });
 });
 
