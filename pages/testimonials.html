@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Testimonials | S.N Dental Clinic — Dr. Srihari, Coimbatore</title>
+  <meta name="description" content="Read verified patient reviews and testimonials for Dr. Srihari at S.N Dental Clinic, Coimbatore. 100/100 rating with 11+ verified Practo reviews.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <style>
+    .rating-hero {
+      background: var(--bg-section);
+      padding: var(--space-3xl) 0;
+      text-align: center;
+    }
+    .rating-big {
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--primary);
+      font-family: var(--font-display);
+      line-height: 1;
+    }
+    .rating-stars-big { font-size: 2rem; color: #F59E0B; }
+    .rating-source { font-size: 0.82rem; color: var(--text-light); margin-top: 8px; }
+    .rating-badges { display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; margin-top: var(--space-lg); }
+
+    .reviews-masonry {
+      columns: 3;
+      column-gap: var(--space-xl);
+    }
+    .review-card {
+      break-inside: avoid;
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-xl);
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(14,165,233,0.08);
+      transition: all var(--transition-base);
+    }
+    .review-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
+    .review-header { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-md); }
+    .review-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; font-weight: 700; color: white;
+      flex-shrink: 0;
+    }
+    .review-name { font-weight: 700; font-size: 0.95rem; }
+    .review-treatment { font-size: 0.75rem; color: var(--primary); font-weight: 600; }
+    .review-date { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+    .review-stars { font-size: 0.9rem; color: #F59E0B; margin-bottom: var(--space-sm); }
+    .review-text { font-size: 0.88rem; color: var(--text-medium); line-height: 1.8; font-style: italic; }
+    .verified-badge { font-size: 0.72rem; color: var(--success); font-weight: 600; display: flex; align-items: center; gap: 4px; margin-top: 12px; }
+
+    @media (max-width: 1024px) { .reviews-masonry { columns: 2; } }
+    @media (max-width: 640px) { .reviews-masonry { columns: 1; } }
+
+    .write-review-card {
+      background: var(--gradient-hero);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      color: white;
+      text-align: center;
+      margin-top: var(--space-3xl);
+    }
+    .write-review-card h3 { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: var(--space-md); }
+    .write-review-card p { opacity: 0.85; margin-bottom: var(--space-xl); }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div style="text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:white;margin-bottom:16px;">S.N Dental Clinic</div><div class="loader-ring"></div></div></div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="nav-logo-icon">🦷</div><div class="nav-logo-text"><span class="nav-logo-name">S.N Dental Clinic</span><span class="nav-logo-sub">Dr. Srihari · Periodontist</span></div></a>
+    <div class="nav-menu" id="navMenu">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="testimonials.html" class="nav-link active">Testimonials</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="appointment.html" class="nav-link nav-cta">📅 Book Appointment</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="section-tag" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.9);display:inline-flex;margin-bottom:var(--space-md);"><i class="fas fa-star"></i> Reviews</div>
+      <h1>Patient Testimonials</h1>
+      <p>Real experiences from our valued patients across Coimbatore.</p>
+      <div class="breadcrumb"><a href="../index.html">Home</a><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i><span>Testimonials</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- RATING SUMMARY -->
+<section class="rating-hero">
+  <div class="container">
+    <div class="reveal">
+      <div class="rating-big">100<span style="font-size:2rem;color:var(--text-light)">/100</span></div>
+      <div class="rating-stars-big" style="margin:12px 0;">★★★★★</div>
+      <div style="font-size:1rem;color:var(--text-medium);font-weight:600;">Based on 11 Verified Reviews</div>
+      <div class="rating-source"><i class="fas fa-check-circle" style="color:var(--success);"></i> Verified by Practo</div>
+      <div class="rating-badges">
+        <span class="badge badge-success"><i class="fas fa-user-check"></i> 100% Recommend</span>
+        <span class="badge badge-primary"><i class="fas fa-award"></i> Top Rated Doctor</span>
+        <span class="badge badge-warning"><i class="fas fa-star"></i> Exceptional Care</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS GRID -->
+<section class="section" style="background:var(--bg-section);">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag"><i class="fas fa-comment-medical"></i> Patient Stories</span>
+      <h2 class="section-title">What Our <span>Patients</span> Say</h2>
+    </div>
+
+    <div class="reviews-masonry">
+      <div class="review-card reveal">
+        <div class="review-header">
+          <div class="review-avatar">R</div>
+          <div><div class="review-name">Rao G.N.</div><div class="review-treatment">Dental Implant</div><div class="review-date">November 2020</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Very professional, very nice treatment care and comfort specialist. Very reasonable right treatment. Both my wife and I are extremely happy with the outcome. Highly recommended!"</p>
+        <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Practo Review</div>
+      </div>
+
+      <div class="review-card reveal delay-1">
+        <div class="review-header">
+          <div class="review-avatar">S</div>
+          <div><div class="review-name">Sumitha</div><div class="review-treatment">Periodontal Treatment</div><div class="review-date">February 2018</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Would like to recommend... very much satisfied with the service. Got clear and detailed explanation about the illness and treatment process. Dr. Srihari is incredibly patient and knowledgeable."</p>
+        <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Practo Review</div>
+      </div>
+
+      <div class="review-card reveal delay-2">
+        <div class="review-header">
+          <div class="review-avatar">V</div>
+          <div><div class="review-name">Vasantha S.</div><div class="review-treatment">Teeth Whitening</div><div class="review-date">June 2016</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Great treatment, very friendly and courteous. Explained the treatment process in very detail. Would highly recommend Dr. Srihari to everyone looking for quality dental care."</p>
+        <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Practo Review</div>
+      </div>
+
+      <div class="review-card reveal delay-3">
+        <div class="review-header">
+          <div class="review-avatar">K</div>
+          <div><div class="review-name">Karthik M.</div><div class="review-treatment">Dental Implants</div><div class="review-date">March 2022</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Dr. Srihari is incredibly skilled and patient. He made me feel completely at ease throughout my dental implant procedure. The clinic is very clean and well-maintained. Excellent service!"</p>
+        <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Patient</div>
+      </div>
+
+      <div class="review-card reveal delay-1">
+        <div class="review-header">
+          <div class="review-avatar">P</div>
+          <div><div class="review-name">Priya N.</div><div class="review-treatment">Braces Treatment</div><div class="review-date">August 2021</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"My daughter's braces treatment went smoothly. Doctor is very approachable and explains everything clearly to both parents and patients. The results are amazing — highly recommended!"</p>
+        <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Patient</div>
+      </div>
+
+      <div class="review-card reveal delay-2">
+        <div class="review-header">
+          <div class="review-avatar">A</div>
+          <div><div class="review-name">Anand R.</div><div class="review-treatment">Root Canal Treatment</div><div class="review-date">January 2023</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"I was very anxious about getting a root canal but Dr. Srihari made the entire experience painless and stress-free. His expertise and calm demeanor are second to none."</p>
+        <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Patient</div>
+      </div>
+
+      <div class="review-card reveal delay-3">
+        <div class="review-header">
+          <div class="review-avatar">M</div>
+          <div><div class="review-name">Meena S.</div><div class="review-treatment">Periodontal Flap Surgery</div><div class="review-date">October 2019</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Had my gum disease treated here. Dr. Srihari is genuinely concerned about his patients' health. He followed up after the surgery and ensured complete recovery. Best dentist in Coimbatore!"</p>
+        <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Patient</div>
+      </div>
+
+      <div class="review-card reveal delay-1">
+        <div class="review-header">
+          <div class="review-avatar">T</div>
+          <div><div class="review-name">Thilaga B.</div><div class="review-treatment">Crown Fixing</div><div class="review-date">May 2023</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Wonderful experience at S.N Dental Clinic! The ceramic crown fitting was perfect — it looks absolutely natural. The clinic is clean, hygienic, and the staff is very welcoming."</p>
+        <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Patient</div>
+      </div>
+
+      <div class="review-card reveal delay-2">
+        <div class="review-header">
+          <div class="review-avatar">S</div>
+          <div><div class="review-name">Sukanya P.</div><div class="review-treatment">Dental Consultation</div><div class="review-date">October 2019</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Very satisfied with the consultation. Dr. Srihari took time to understand my concerns and provided a clear treatment plan. The pricing is very reasonable for such specialist-level care."</p>
+        <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Practo Review</div>
+      </div>
+    </div>
+
+    <!-- Write a Review CTA -->
+    <div class="write-review-card reveal">
+      <h3>Had a Great Experience?</h3>
+      <p>Share your smile story and help others choose quality dental care. Your review means the world to us!</p>
+      <div style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap;">
+        <a href="https://www.practo.com/coimbatore/doctor/dr-srihari-5-dentist" target="_blank" class="btn btn-ghost btn-lg"><i class="fas fa-star"></i> Write a Review on Practo</a>
+        <a href="appointment.html" class="btn" style="background:white;color:var(--primary-dark);font-weight:700;" id="testimonials-book-btn"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div style="text-align:center;padding:var(--space-lg) 0;"><p style="font-size:0.85rem;">© 2024 S.N Dental Clinic · Dr. Srihari, MDS · R.S. Puram, Coimbatore</p></div></div></footer>
+
+<div class="whatsapp-float">
+  <div class="wa-chat-widget" id="waWidget"><div class="wa-chat-header"><div class="wa-chat-avatar">🦷</div><div><div class="wa-chat-name">S.N Dental Clinic</div><div class="wa-chat-status">Typically replies within minutes</div></div><button class="wa-chat-close" id="waClose">✕</button></div><div class="wa-chat-messages" id="waMessages"></div><div class="wa-chat-options" id="waOptions"></div><a class="wa-open-link" id="waOpenLink" target="_blank" href="https://wa.me/919843022094" style="display:none;"><i class="fab fa-whatsapp"></i> Open WhatsApp</a></div>
+  <button class="whatsapp-btn" id="waBtn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></button>
+</div>
+<button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+<script src="../js/main.js"></script>
+</body>
+</html>
+

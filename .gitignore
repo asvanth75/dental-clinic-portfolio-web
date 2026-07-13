@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Runtime data
+data/db.json
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor directories
+.vscode/
+.idea/
+
+# Environment files (keep sensitive data out)
+.env
+.env.local
+.env.production
+
+# Build output
+dist/
+build/
+
+# Firebase
+.firebase/
+firebase-debug.log

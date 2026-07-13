@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | S.N Dental Clinic — Before & After, Smile Makeovers, Coimbatore</title>
+  <meta name="description" content="View our dental transformation gallery — before and after smile makeovers, implants, whitening, and orthodontics at S.N Dental Clinic by Dr. Srihari.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <style>
+    .gallery-grid-full {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-md);
+    }
+    .gallery-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      background: var(--bg-section);
+    }
+    .gallery-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+      display: block;
+    }
+    .gallery-card:hover .gallery-card-img { transform: scale(1.08); }
+    .gallery-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14,26,46,0.85), transparent 50%);
+      opacity: 0;
+      transition: opacity var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--space-md);
+    }
+    .gallery-card:hover .gallery-card-overlay { opacity: 1; }
+    .gallery-card-label { color: white; font-weight: 700; font-size: 0.9rem; }
+    .gallery-card-cat { color: rgba(255,255,255,0.7); font-size: 0.75rem; }
+    .gallery-zoom {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.7);
+      width: 44px; height: 44px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 1.1rem;
+      opacity: 0;
+      transition: all var(--transition-bounce);
+    }
+    .gallery-card:hover .gallery-zoom { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    .gallery-badge {
+      position: absolute;
+      top: var(--space-sm);
+      left: var(--space-sm);
+      z-index: 2;
+    }
+    .gallery-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--gradient-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: white;
+      font-size: 3rem;
+    }
+    .gallery-placeholder p { font-size: 0.85rem; opacity: 0.85; }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div style="text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:white;margin-bottom:16px;">S.N Dental Clinic</div><div class="loader-ring"></div></div></div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="nav-logo-icon">🦷</div><div class="nav-logo-text"><span class="nav-logo-name">S.N Dental Clinic</span><span class="nav-logo-sub">Dr. Srihari · Periodontist</span></div></a>
+    <div class="nav-menu" id="navMenu">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="gallery.html" class="nav-link active">Gallery</a>
+      <a href="testimonials.html" class="nav-link">Testimonials</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="appointment.html" class="nav-link nav-cta">📅 Book Appointment</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="section-tag" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.9);display:inline-flex;margin-bottom:var(--space-md);"><i class="fas fa-images"></i> Visual Portfolio</div>
+      <h1>Clinic Gallery</h1>
+      <p>Explore our smile transformations, clinic spaces, and treatment results.</p>
+      <div class="breadcrumb"><a href="../index.html">Home</a><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i><span>Gallery</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <!-- Filters -->
+    <div class="filter-tabs reveal">
+      <button class="filter-tab active" data-filter="all" onclick="filterGallery('all', this)">All Work</button>
+      <button class="filter-tab" data-filter="before-after" onclick="filterGallery('before-after', this)">Before & After</button>
+      <button class="filter-tab" data-filter="implants" onclick="filterGallery('implants', this)">Implants</button>
+      <button class="filter-tab" data-filter="whitening" onclick="filterGallery('whitening', this)">Whitening</button>
+      <button class="filter-tab" data-filter="braces" onclick="filterGallery('braces', this)">Braces</button>
+      <button class="filter-tab" data-filter="clinic" onclick="filterGallery('clinic', this)">Clinic</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-grid-full" id="galleryGrid">
+
+      <!-- Clinic Images (using generated images) -->
+      <div class="gallery-card reveal" data-cat="clinic">
+        <div class="gallery-badge"><span class="badge badge-primary">Clinic</span></div>
+        <img class="gallery-card-img" src="../images/clinic_interior.png" alt="S.N Dental Clinic interior" loading="lazy" onclick="openLightbox('../images/clinic_interior.png', 'S.N Dental Clinic — Modern Interior')">
+        <div class="gallery-card-overlay">
+          <div class="gallery-card-label">Clinic Interior</div>
+          <div class="gallery-card-cat">Modern & Sterile</div>
+        </div>
+        <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+      </div>
+
+      <div class="gallery-card reveal delay-1" data-cat="clinic">
+        <div class="gallery-badge"><span class="badge badge-primary">Clinic</span></div>
+        <img class="gallery-card-img" src="../images/dental_services.png" alt="Dental services equipment" loading="lazy" onclick="openLightbox('../images/dental_services.png', 'Advanced Dental Equipment')">
+        <div class="gallery-card-overlay">
+          <div class="gallery-card-label">Advanced Equipment</div>
+          <div class="gallery-card-cat">State-of-the-art</div>
+        </div>
+        <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+      </div>
+
+      <!-- Placeholder gallery items with gradient backgrounds -->
+      <div class="gallery-card reveal delay-2" data-cat="before-after implants">
+        <div class="gallery-badge"><span class="badge badge-success">Before & After</span></div>
+        <div class="gallery-placeholder" onclick="openLightbox('', 'Dental Implant — Before & After')">
+          🦷<p>Implant Transformation</p>
+        </div>
+        <div class="gallery-card-overlay">
+          <div class="gallery-card-label">Dental Implant</div>
+          <div class="gallery-card-cat">Before & After</div>
+        </div>
+        <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+      </div>
+
+      <div class="gallery-card reveal delay-3" data-cat="whitening before-after">
+        <div class="gallery-badge"><span class="badge badge-success">Before & After</span></div>
+        <div class="gallery-placeholder" style="background:linear-gradient(135deg,#F59E0B,#D97706);" onclick="openLightbox('', 'Teeth Whitening — Before & After')">
+          ✨<p>Whitening Transformation</p>
+        </div>
+        <div class="gallery-card-overlay">
+          <div class="gallery-card-label">Teeth Whitening</div>
+          <div class="gallery-card-cat">Before & After</div>
+        </div>
+        <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+      </div>
+
+      <div class="gallery-card reveal delay-1" data-cat="braces before-after">
+        <div class="gallery-badge"><span class="badge badge-success">Before & After</span></div>
+        <div class="gallery-placeholder" style="background:linear-gradient(135deg,#10B981,#059669);" onclick="openLightbox('', 'Braces — Before & After')">
+          😁<p>Orthodontic Results</p>
+        </div>
+        <div class="gallery-card-overlay">
+          <div class="gallery-card-label">Braces Treatment</div>
+          <div class="gallery-card-cat">Orthodontics</div>
+        </div>
+        <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+      </div>
+
+      <div class="gallery-card reveal delay-2" data-cat="implants">
+        <div class="gallery-badge"><span class="badge badge-primary">Implants</span></div>
+        <div class="gallery-placeholder" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);" onclick="openLightbox('', 'Full Arch Implant Case')">
+          🔬<p>Full Arch Restoration</p>
+        </div>
+        <div class="gallery-card-overlay">
+          <div class="gallery-card-label">Full Arch Implants</div>
+          <div class="gallery-card-cat">Oral Implantology</div>
+        </div>
+        <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+      </div>
+
+      <div class="gallery-card reveal delay-3" data-cat="clinic">
+        <div class="gallery-badge"><span class="badge badge-primary">Clinic</span></div>
+        <img class="gallery-card-img" src="../images/doctor_portrait.png" alt="Dr. Srihari at clinic" loading="lazy" onclick="openLightbox('../images/doctor_portrait.png', 'Dr. Srihari — S.N Dental Clinic')">
+        <div class="gallery-card-overlay">
+          <div class="gallery-card-label">Dr. Srihari</div>
+          <div class="gallery-card-cat">Specialist Periodontist</div>
+        </div>
+        <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+      </div>
+
+      <div class="gallery-card reveal delay-1" data-cat="whitening">
+        <div class="gallery-badge"><span class="badge badge-warning">Whitening</span></div>
+        <div class="gallery-placeholder" style="background:linear-gradient(135deg,#F59E0B,#0EA5E9);" onclick="openLightbox('', 'Laser Whitening Result')">
+          ⚡<p>Laser Whitening</p>
+        </div>
+        <div class="gallery-card-overlay">
+          <div class="gallery-card-label">Laser Whitening</div>
+          <div class="gallery-card-cat">Cosmetic Dentistry</div>
+        </div>
+        <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+      </div>
+
+      <div class="gallery-card reveal delay-2" data-cat="before-after">
+        <div class="gallery-badge"><span class="badge badge-success">Before & After</span></div>
+        <div class="gallery-placeholder" style="background:linear-gradient(135deg,#EF4444,#DC2626);" onclick="openLightbox('', 'Gum Disease Treatment — Before & After')">
+          🩺<p>Periodontal Treatment</p>
+        </div>
+        <div class="gallery-card-overlay">
+          <div class="gallery-card-label">Gum Treatment</div>
+          <div class="gallery-card-cat">Periodontology</div>
+        </div>
+        <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+      </div>
+
+    </div>
+
+    <!-- Upload Note -->
+    <div style="background:var(--bg-section);border-radius:var(--radius-lg);padding:var(--space-xl);text-align:center;margin-top:var(--space-2xl);" class="reveal">
+      <p style="color:var(--text-light);font-size:0.88rem;"><i class="fas fa-info-circle" style="color:var(--primary);"></i> More patient transformation photos will be added soon. All images shared with patient consent.</p>
+      <a href="appointment.html" class="btn btn-primary mt-md" id="gallery-book-btn"><i class="fas fa-calendar-check"></i> Book Your Transformation</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div style="text-align:center;padding:var(--space-lg) 0;"><p style="font-size:0.85rem;">© 2024 S.N Dental Clinic · Dr. Srihari, MDS · R.S. Puram, Coimbatore</p></div></div></footer>
+
+<div class="whatsapp-float">
+  <div class="wa-chat-widget" id="waWidget"><div class="wa-chat-header"><div class="wa-chat-avatar">🦷</div><div><div class="wa-chat-name">S.N Dental Clinic</div><div class="wa-chat-status">Typically replies within minutes</div></div><button class="wa-chat-close" id="waClose">✕</button></div><div class="wa-chat-messages" id="waMessages"></div><div class="wa-chat-options" id="waOptions"></div><a class="wa-open-link" id="waOpenLink" target="_blank" href="https://wa.me/919843022094" style="display:none;"><i class="fab fa-whatsapp"></i> Open WhatsApp</a></div>
+  <button class="whatsapp-btn" id="waBtn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></button>
+</div>
+<button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+<script src="../js/main.js"></script>
+<script>
+  window.filterGallery = function(cat, btn) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.gallery-card').forEach(card => {
+      const cats = card.dataset.cat || '';
+      const show = cat === 'all' || cats.includes(cat);
+      card.style.display = show ? '' : 'none';
+      if (show) {
+        card.style.animation = 'fadeInUp 0.4s ease both';
+      }
+    });
+  };
+</script>
+</body>
+</html>
+

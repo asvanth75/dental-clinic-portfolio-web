@@ -1,0 +1,450 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Dr. Srihari | Specialist Periodontist — S.N Dental Clinic, Coimbatore</title>
+  <meta name="description" content="Learn about Dr. Srihari, MDS Periodontist with 25+ years of experience at S.N Dental Clinic, R.S. Puram, Coimbatore. Member of Indian Dental Association.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <style>
+    /* About-specific */
+    .doctor-profile-section { background: white; }
+    .doctor-profile-inner {
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: var(--space-4xl);
+      align-items: start;
+    }
+    .doctor-photo-wrap {
+      position: sticky;
+      top: 100px;
+    }
+    .doctor-photo-card {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+    }
+    .doctor-photo-card img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+    }
+    .doctor-photo-badge {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      background: var(--gradient-primary);
+      color: white;
+      padding: var(--space-lg);
+      text-align: center;
+    }
+    .doctor-photo-badge .title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; }
+    .doctor-photo-badge .subtitle { font-size: 0.8rem; opacity: 0.85; margin-top: 4px; }
+
+    .doctor-quick-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+    .quick-stat {
+      background: var(--bg-light);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      text-align: center;
+      border: 1px solid rgba(14,165,233,0.1);
+    }
+    .quick-stat-val { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+    .quick-stat-lbl { font-size: 0.72rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; }
+
+    .doctor-name {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: var(--space-sm);
+    }
+    .doctor-title-tags { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-lg); }
+
+    .qualif-card {
+      background: var(--bg-section);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      border-left: 4px solid var(--primary);
+      margin-bottom: var(--space-md);
+    }
+    .qualif-year { font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+    .qualif-degree { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin: 4px 0; }
+    .qualif-inst { font-size: 0.85rem; color: var(--text-light); }
+
+    .membership-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+    }
+    .membership-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary-glow);
+      color: var(--primary-dark);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 600;
+      border: 1px solid rgba(14,165,233,0.2);
+    }
+
+    .profile-section-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin: var(--space-2xl) 0 var(--space-lg);
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--accent-dark);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .profile-section-title i { color: var(--primary); }
+
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+    .expertise-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.88rem;
+      color: var(--text-medium);
+      padding: 10px 14px;
+      background: var(--bg-section);
+      border-radius: var(--radius-md);
+    }
+    .expertise-item i { color: var(--primary); }
+
+    /* Mission Vision */
+    .mission-vision {
+      background: var(--gradient-hero);
+      color: white;
+      padding: var(--space-4xl) 0;
+    }
+    .mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+    .mv-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      backdrop-filter: blur(10px);
+    }
+    .mv-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-lg);
+    }
+    .mv-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: var(--space-md);
+    }
+    .mv-card p { opacity: 0.85; line-height: 1.8; font-size: 0.95rem; }
+
+    @media (max-width: 968px) {
+      .doctor-profile-inner { grid-template-columns: 1fr; }
+      .doctor-photo-wrap { position: relative; top: 0; max-width: 340px; margin: 0 auto; }
+      .expertise-grid { grid-template-columns: 1fr; }
+      .mv-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-loader">
+  <div style="text-align:center;">
+    <div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:white;margin-bottom:16px;">S.N Dental Clinic</div>
+    <div class="loader-ring"></div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar" role="navigation" aria-label="Main Navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-icon">🦷</div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">S.N Dental Clinic</span>
+        <span class="nav-logo-sub">Dr. Srihari · Periodontist</span>
+      </div>
+    </a>
+    <div class="nav-menu" id="navMenu">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link active">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="testimonials.html" class="nav-link">Testimonials</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="appointment.html" class="nav-link nav-cta">📅 Book Appointment</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="section-tag" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.9);display:inline-flex;margin-bottom:var(--space-md);">
+        <i class="fas fa-user-md"></i> About the Doctor
+      </div>
+      <h1>Dr. Srihari</h1>
+      <p>MDS Periodontist & Specialist Dentist · 25+ Years of Excellence</p>
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <i class="fas fa-chevron-right" style="font-size:0.65rem;"></i>
+        <span>About</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DOCTOR PROFILE SECTION -->
+<section class="section doctor-profile-section">
+  <div class="container">
+    <div class="doctor-profile-inner">
+
+      <!-- Photo Side -->
+      <div class="doctor-photo-wrap reveal-left">
+        <div class="doctor-photo-card">
+          <img src="../images/doctor_portrait.png" alt="Dr. Srihari — Specialist Periodontist at S.N Dental Clinic, Coimbatore" loading="eager">
+          <div class="doctor-photo-badge">
+            <div class="title">Dr. Srihari</div>
+            <div class="subtitle">MDS · BDS · Periodontist</div>
+          </div>
+        </div>
+
+        <div class="doctor-quick-stats">
+          <div class="quick-stat">
+            <div class="quick-stat-val">25+</div>
+            <div class="quick-stat-lbl">Years Exp</div>
+          </div>
+          <div class="quick-stat">
+            <div class="quick-stat-val">5000+</div>
+            <div class="quick-stat-lbl">Patients</div>
+          </div>
+          <div class="quick-stat">
+            <div class="quick-stat-val">100</div>
+            <div class="quick-stat-lbl">Rating</div>
+          </div>
+          <div class="quick-stat">
+            <div class="quick-stat-val">2</div>
+            <div class="quick-stat-lbl">Memberships</div>
+          </div>
+        </div>
+
+        <a href="appointment.html" class="btn btn-primary" style="width:100%;margin-top:var(--space-lg);justify-content:center;">
+          <i class="fas fa-calendar-check"></i> Book Appointment
+        </a>
+        <a href="https://wa.me/919843022094" target="_blank" class="btn btn-whatsapp" style="width:100%;margin-top:var(--space-sm);justify-content:center;">
+          <i class="fab fa-whatsapp"></i> WhatsApp Consultation
+        </a>
+      </div>
+
+      <!-- Content Side -->
+      <div class="reveal-right">
+        <span class="section-tag"><i class="fas fa-stethoscope"></i> Specialist Periodontist</span>
+        <h1 class="doctor-name mt-md">Dr. Srihari</h1>
+        <div class="doctor-title-tags">
+          <span class="badge badge-primary"><i class="fas fa-graduation-cap"></i> MDS Periodontology</span>
+          <span class="badge badge-primary"><i class="fas fa-tooth"></i> BDS</span>
+          <span class="badge badge-success"><i class="fas fa-check-circle"></i> Practo Verified</span>
+          <span class="badge badge-warning"><i class="fas fa-star"></i> 100/100 Rating</span>
+        </div>
+
+        <p style="font-size:1rem;color:var(--text-medium);line-height:1.9;">
+          Dr. Srihari is a highly respected Specialist Periodontist and Dentist at <strong>S.N Dental Clinic</strong> in R.S. Puram, Coimbatore. With over <strong>25 years of dedicated clinical experience</strong>, he has established himself as one of Coimbatore's most trusted dental specialists.
+        </p>
+        <p style="font-size:1rem;color:var(--text-medium);line-height:1.9;margin-top:var(--space-md);">
+          Specializing in periodontal surgery, dental implants, and comprehensive restorative dentistry, Dr. Srihari combines scientific precision with a compassionate, patient-first approach. He takes great pride in explaining treatment options clearly and ensuring every patient feels comfortable and confident.
+        </p>
+
+        <!-- Qualifications -->
+        <div class="profile-section-title">
+          <i class="fas fa-graduation-cap"></i> Education & Qualifications
+        </div>
+        <div class="qualif-card reveal">
+          <div class="qualif-year">2001</div>
+          <div class="qualif-degree">MDS — Periodontology & Oral Implantology</div>
+          <div class="qualif-inst">Rajah Muthiah Dental College Hospital, Annamalai University, Tamil Nadu</div>
+        </div>
+        <div class="qualif-card reveal delay-1">
+          <div class="qualif-year">1996</div>
+          <div class="qualif-degree">BDS — Bachelor of Dental Surgery</div>
+          <div class="qualif-inst">Rajah Muthiah Dental College Hospital, Annamalai University, Tamil Nadu</div>
+        </div>
+
+        <!-- Specializations -->
+        <div class="profile-section-title">
+          <i class="fas fa-star-of-life"></i> Areas of Expertise
+        </div>
+        <div class="expertise-grid">
+          <div class="expertise-item reveal delay-1"><i class="fas fa-check"></i> Periodontal Flap Surgery</div>
+          <div class="expertise-item reveal delay-2"><i class="fas fa-check"></i> Dental Implants</div>
+          <div class="expertise-item reveal delay-3"><i class="fas fa-check"></i> Teeth Whitening</div>
+          <div class="expertise-item reveal delay-4"><i class="fas fa-check"></i> Braces & Aligners</div>
+          <div class="expertise-item reveal delay-1"><i class="fas fa-check"></i> Crowns & Bridges</div>
+          <div class="expertise-item reveal delay-2"><i class="fas fa-check"></i> Wisdom Tooth Extraction</div>
+          <div class="expertise-item reveal delay-3"><i class="fas fa-check"></i> BPS Dentures</div>
+          <div class="expertise-item reveal delay-4"><i class="fas fa-check"></i> Bleeding Gum Treatment</div>
+          <div class="expertise-item reveal delay-1"><i class="fas fa-check"></i> Cosmetic Dentistry</div>
+          <div class="expertise-item reveal delay-2"><i class="fas fa-check"></i> Oral Surgery</div>
+        </div>
+
+        <!-- Memberships -->
+        <div class="profile-section-title">
+          <i class="fas fa-id-badge"></i> Professional Memberships
+        </div>
+        <div class="membership-grid">
+          <span class="membership-tag"><i class="fas fa-shield-alt"></i> Indian Dental Association (IDA)</span>
+          <span class="membership-tag"><i class="fas fa-teeth"></i> Indian Society of Periodontology</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER TIMELINE -->
+<section class="section" style="background:var(--bg-section);">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag"><i class="fas fa-history"></i> Career Journey</span>
+      <h2 class="section-title">Professional <span>Timeline</span></h2>
+    </div>
+    <div class="timeline" style="max-width:700px;margin:0 auto;">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1996</div>
+        <div class="timeline-title">BDS Graduation</div>
+        <div class="timeline-desc">Completed Bachelor of Dental Surgery from Rajah Muthiah Dental College, Annamalai University — beginning a lifelong journey of healing smiles.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1996 – 1999</div>
+        <div class="timeline-title">Junior Dental Surgeon</div>
+        <div class="timeline-desc">Gained early clinical experience working in dental clinics across Coimbatore, developing foundational skills in general dentistry and patient care.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1999 – 2001</div>
+        <div class="timeline-title">MDS Specialization</div>
+        <div class="timeline-desc">Pursued and completed MDS in Periodontology & Oral Implantology from Annamalai University, deepening expertise in gum disease and implant surgery.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2001</div>
+        <div class="timeline-title">Founded S.N Dental Clinic</div>
+        <div class="timeline-desc">Established S.N Dental Clinic at R.S. Puram, Coimbatore — bringing specialist periodontal care and modern dentistry to the community.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2001 – Present</div>
+        <div class="timeline-title">Specialist Practice & Growth</div>
+        <div class="timeline-desc">Over 25 years of continuous practice, serving 5,000+ patients, performing 12,000+ treatments, and maintaining a perfect 100/100 Practo rating.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION & VISION -->
+<section class="mission-vision">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.9);">
+        <i class="fas fa-heart"></i> Our Purpose
+      </span>
+      <h2 class="section-title" style="color:white;">Mission & <span style="-webkit-text-fill-color:initial;color:#7DD3FC;">Vision</span></h2>
+    </div>
+    <div class="mv-grid">
+      <div class="mv-card reveal-left">
+        <div class="mv-icon">🎯</div>
+        <h3>Our Mission</h3>
+        <p>To provide the highest quality dental care to every patient — combining advanced periodontology expertise with genuine compassion. We believe every patient deserves a healthy, beautiful smile, and we're committed to making that accessible and affordable for the Coimbatore community.</p>
+      </div>
+      <div class="mv-card reveal-right">
+        <div class="mv-icon">🌟</div>
+        <h3>Our Vision</h3>
+        <p>To be Coimbatore's most trusted dental specialty center — where science meets art, and patients leave not just with healthier teeth, but with greater confidence. We envision a community where preventive dental care is a habit, and fear of the dentist is a thing of the past.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:white;padding:var(--space-4xl) 0;text-align:center;">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">Ready to Meet Dr. Srihari?</h2>
+      <p class="section-subtitle">Book your consultation today and take the first step toward your best smile.</p>
+      <div style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap;margin-top:var(--space-xl);">
+        <a href="appointment.html" class="btn btn-primary btn-lg"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+        <a href="contact.html" class="btn btn-secondary btn-lg"><i class="fas fa-phone"></i> Contact Clinic</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER (simplified) -->
+<footer class="footer">
+  <div class="container">
+    <div style="text-align:center;padding:var(--space-lg) 0;">
+      <p style="font-size:0.85rem;">© 2024 S.N Dental Clinic · Dr. Srihari, MDS · R.S. Puram, Coimbatore</p>
+      <p style="font-size:0.82rem;margin-top:8px;"><a href="../index.html" style="color:var(--primary-light);">Home</a> · <a href="services.html" style="color:var(--primary-light);">Services</a> · <a href="appointment.html" style="color:var(--primary-light);">Book Appointment</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<div class="whatsapp-float">
+  <div class="wa-chat-widget" id="waWidget">
+    <div class="wa-chat-header">
+      <div class="wa-chat-avatar">🦷</div>
+      <div><div class="wa-chat-name">S.N Dental Clinic</div><div class="wa-chat-status">Typically replies within minutes</div></div>
+      <button class="wa-chat-close" id="waClose">✕</button>
+    </div>
+    <div class="wa-chat-messages" id="waMessages"></div>
+    <div class="wa-chat-options" id="waOptions"></div>
+    <a class="wa-open-link" id="waOpenLink" target="_blank" href="https://wa.me/919843022094" style="display:none;"><i class="fab fa-whatsapp"></i> Open WhatsApp</a>
+  </div>
+  <button class="whatsapp-btn" id="waBtn" aria-label="Open WhatsApp"><i class="fab fa-whatsapp"></i></button>
+</div>
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="../js/main.js"></script>
+<script>
+  // Animate timeline items
+  const tlObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 150);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.timeline-item').forEach(el => tlObserver.observe(el));
+</script>
+</body>
+</html>
+
