@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment Booking | S.N Dental Clinic — Dr. Srihari, Coimbatore</title>
+  <meta name="description" content="Book an appointment with Dr. Srihari at S.N Dental Clinic, R.S. Puram, Coimbatore. Easy online booking with instant confirmation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <style>
+    .appt-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--space-3xl);
+      align-items: start;
+    }
+    .appt-form-card {
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+    }
+    .appt-form-header {
+      background: var(--gradient-primary);
+      padding: var(--space-xl);
+      color: white;
+    }
+    .appt-form-header h2 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 4px; }
+    .appt-form-header p { opacity: 0.85; font-size: 0.88rem; }
+    .appt-form-body { padding: var(--space-xl); }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); }
+    .form-step { display: none; }
+    .form-step.active { display: block; }
+    .step-title { font-size: 1.1rem; font-weight: 700; margin-bottom: var(--space-lg); color: var(--text-dark); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--accent-dark); }
+    .step-nav { display: flex; gap: var(--space-md); margin-top: var(--space-xl); }
+    .time-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .time-slot {
+      padding: 10px;
+      border: 2px solid rgba(0,0,0,0.08);
+      border-radius: var(--radius-md);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all var(--transition-fast);
+      background: white;
+    }
+    .time-slot:hover { border-color: var(--primary); color: var(--primary); }
+    .time-slot.selected { background: var(--primary); color: white; border-color: var(--primary); }
+    .time-slot.booked { background: #f0f0f5; color: var(--text-muted); cursor: not-allowed; border-color: transparent; text-decoration: line-through; }
+
+    /* Sidebar */
+    .appt-sidebar { position: sticky; top: 100px; }
+    .appt-info-card {
+      background: var(--gradient-hero);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      color: white;
+      margin-bottom: var(--space-lg);
+    }
+    .appt-info-card h3 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: var(--space-lg); }
+    .appt-detail { display: flex; gap: var(--space-sm); margin-bottom: var(--space-md); font-size: 0.88rem; opacity: 0.9; }
+    .appt-detail i { color: var(--primary-light); flex-shrink: 0; margin-top: 2px; }
+    .policies-card { background: white; border-radius: var(--radius-xl); padding: var(--space-xl); box-shadow: var(--shadow-md); }
+    .policy-item { display: flex; gap: var(--space-sm); margin-bottom: var(--space-md); font-size: 0.85rem; color: var(--text-medium); }
+    .policy-item i { color: var(--primary); flex-shrink: 0; }
+
+    /* Success screen */
+    .success-screen { display: none; text-align: center; padding: var(--space-3xl) var(--space-xl); }
+    .success-icon { font-size: 4rem; margin-bottom: var(--space-lg); animation: scaleIn 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+    .success-screen h3 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: var(--space-md); color: var(--success); }
+    .appt-summary { background: var(--bg-section); border-radius: var(--radius-md); padding: var(--space-lg); text-align: left; margin: var(--space-lg) 0; }
+    .appt-summary-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 0.88rem; }
+    .appt-summary-row:last-child { border-bottom: none; }
+    .appt-summary-row span:first-child { color: var(--text-light); }
+    .appt-summary-row span:last-child { font-weight: 600; color: var(--text-dark); }
+
+    @media (max-width: 968px) {
+      .appt-layout { grid-template-columns: 1fr; }
+      .appt-sidebar { position: relative; top: 0; }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .time-slots { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 480px) { .time-slots { grid-template-columns: repeat(3, 1fr); } }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div style="text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:white;margin-bottom:16px;">S.N Dental Clinic</div><div class="loader-ring"></div></div></div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="nav-logo-icon">🦷</div><div class="nav-logo-text"><span class="nav-logo-name">S.N Dental Clinic</span><span class="nav-logo-sub">Dr. Srihari · Periodontist</span></div></a>
+    <div class="nav-menu" id="navMenu">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="testimonials.html" class="nav-link">Testimonials</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="appointment.html" class="nav-link nav-cta active">📅 Book Appointment</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="section-tag" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.9);display:inline-flex;margin-bottom:var(--space-md);"><i class="fas fa-calendar-check"></i> Easy Booking</div>
+      <h1>Book Your Appointment</h1>
+      <p>Schedule a consultation with Dr. Srihari in just a few simple steps.</p>
+      <div class="breadcrumb"><a href="../index.html">Home</a><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i><span>Book Appointment</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <!-- Step Indicator -->
+    <div class="steps-indicator reveal">
+      <div class="step-item active" id="step-indicator-1">
+        <div class="step-num">1</div>
+        <div class="step-label">Personal Info</div>
+      </div>
+      <div class="step-item" id="step-indicator-2">
+        <div class="step-num">2</div>
+        <div class="step-label">Schedule</div>
+      </div>
+      <div class="step-item" id="step-indicator-3">
+        <div class="step-num">3</div>
+        <div class="step-label">Confirm</div>
+      </div>
+    </div>
+
+    <div class="appt-layout">
+      <!-- MAIN FORM -->
+      <div class="appt-form-card reveal">
+        <div class="appt-form-header">
+          <h2>📅 Schedule Your Visit</h2>
+          <p>Fill in the details below — our team will confirm your slot within 30 minutes.</p>
+        </div>
+        <div class="appt-form-body">
+
+          <!-- SUCCESS SCREEN -->
+          <div class="success-screen" id="successScreen">
+            <div class="success-icon">✅</div>
+            <h3>Appointment Requested!</h3>
+            <p style="color:var(--text-light);margin-bottom:var(--space-lg);">Your appointment request has been submitted successfully. Our team will contact you within 30 minutes to confirm your slot.</p>
+            <div class="appt-id-badge" id="apptIdDisplay">SN-000000</div>
+            <div class="appt-summary" id="apptSummary"></div>
+            <div style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap;margin-top:var(--space-lg);">
+              <a href="https://wa.me/919843022094" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+              <a href="../index.html" class="btn btn-secondary"><i class="fas fa-home"></i> Back to Home</a>
+            </div>
+          </div>
+
+          <!-- STEP 1: Personal Info -->
+          <div class="form-step active" id="step1">
+            <div class="step-title"><i class="fas fa-user" style="color:var(--primary)"></i> Personal Information</div>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="ap-name">Full Name <span>*</span></label>
+                <input type="text" class="form-control" id="ap-name" placeholder="Enter your full name" required>
+                <div class="form-error">Please enter your name.</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ap-phone">Mobile Number <span>*</span></label>
+                <input type="tel" class="form-control" id="ap-phone" placeholder="+91 98430 22094" required>
+                <div class="form-error">Enter a valid 10-digit number.</div>
+              </div>
+            </div>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="ap-email">Email Address</label>
+                <input type="email" class="form-control" id="ap-email" placeholder="you@example.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ap-age">Age <span>*</span></label>
+                <input type="number" class="form-control" id="ap-age" placeholder="e.g. 32" min="1" max="120" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ap-gender">Gender <span>*</span></label>
+              <select class="form-control" id="ap-gender" required>
+                <option value="">Select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="step-nav">
+              <button class="btn btn-primary" style="margin-left:auto;" onclick="nextStep(1)">Next: Schedule <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <!-- STEP 2: Schedule -->
+          <div class="form-step" id="step2">
+            <div class="step-title"><i class="fas fa-calendar" style="color:var(--primary)"></i> Choose Date & Time</div>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="ap-date">Preferred Date <span>*</span></label>
+                <input type="date" class="form-control" id="ap-date" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ap-session">Session <span>*</span></label>
+                <select class="form-control" id="ap-session" onchange="updateTimeSlots()" required>
+                  <option value="">Select session</option>
+                  <option value="morning">Morning (9AM – 1PM)</option>
+                  <option value="evening">Evening (4PM – 8PM)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Preferred Time Slot <span>*</span></label>
+              <div class="time-slots" id="timeSlots">
+                <div style="color:var(--text-muted);font-size:0.85rem;grid-column:1/-1;padding:16px;text-align:center;">Select a session above to see available slots.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ap-issue">Dental Issue / Reason for Visit <span>*</span></label>
+              <select class="form-control" id="ap-issue" required>
+                <option value="">Select your dental concern</option>
+                <option>Dental Implant</option>
+                <option>Periodontal / Gum Disease</option>
+                <option>Teeth Whitening</option>
+                <option>Braces / Aligners</option>
+                <option>Crown or Bridge</option>
+                <option>Root Canal</option>
+                <option>Tooth Extraction / Wisdom Tooth</option>
+                <option>Dental Cleaning</option>
+                <option>Bleeding Gums</option>
+                <option>Toothache / Emergency</option>
+                <option>Cosmetic Dentistry</option>
+                <option>Routine Check-up</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="step-nav">
+              <button class="btn btn-secondary" onclick="prevStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+              <button class="btn btn-primary" style="margin-left:auto;" onclick="nextStep(2)">Next: Confirm <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <!-- STEP 3: Confirm -->
+          <div class="form-step" id="step3">
+            <div class="step-title"><i class="fas fa-check-circle" style="color:var(--primary)"></i> Confirm Appointment</div>
+            <div class="appt-summary" id="reviewSummary" style="margin-bottom:var(--space-lg);"></div>
+            <div class="form-group">
+              <label class="form-label" for="ap-notes">Additional Notes (Optional)</label>
+              <textarea class="form-control" id="ap-notes" placeholder="Any specific concerns, medical history, allergies, or messages for Dr. Srihari..." rows="4"></textarea>
+            </div>
+            <div style="background:var(--bg-section);border-radius:var(--radius-md);padding:var(--space-md);margin-bottom:var(--space-lg);font-size:0.82rem;color:var(--text-light);">
+              <i class="fas fa-info-circle" style="color:var(--primary);"></i>
+              By submitting this form, you consent to being contacted by our clinic team to confirm your appointment. We do not share your data with any third party.
+            </div>
+            <div class="step-nav">
+              <button class="btn btn-secondary" onclick="prevStep(3)"><i class="fas fa-arrow-left"></i> Back</button>
+              <button class="btn btn-primary" style="margin-left:auto;" id="submitApptBtn" onclick="submitAppointment()">
+                <i class="fas fa-calendar-check"></i> Confirm Appointment
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="appt-sidebar">
+        <div class="appt-info-card reveal-right">
+          <h3>🦷 Why Book With Us?</h3>
+          <div class="appt-detail"><i class="fas fa-check-circle"></i><span>Confirmation within 30 minutes</span></div>
+          <div class="appt-detail"><i class="fas fa-check-circle"></i><span>Flexible morning & evening slots</span></div>
+          <div class="appt-detail"><i class="fas fa-check-circle"></i><span>25+ years of specialist expertise</span></div>
+          <div class="appt-detail"><i class="fas fa-check-circle"></i><span>Modern sterilized clinic equipment</span></div>
+          <div class="appt-detail"><i class="fas fa-check-circle"></i><span>Transparent pricing, no hidden costs</span></div>
+          <div style="margin-top:var(--space-md);padding-top:var(--space-md);border-top:1px solid rgba(255,255,255,0.15);">
+            <div style="font-size:0.78rem;opacity:0.7;margin-bottom:8px;">PREFER TO CALL?</div>
+            <a href="tel:+919843022094" style="color:white;font-weight:700;font-size:1.05rem;"><i class="fas fa-phone"></i> +91 98430 22094</a>
+          </div>
+        </div>
+
+        <div class="policies-card reveal-right delay-1">
+          <div style="font-weight:700;margin-bottom:var(--space-md);font-size:0.95rem;">📋 Appointment Policies</div>
+          <div class="policy-item"><i class="fas fa-clock"></i><span>Please arrive 10 minutes before your scheduled time.</span></div>
+          <div class="policy-item"><i class="fas fa-phone"></i><span>If you need to cancel, kindly inform us at least 2 hours in advance.</span></div>
+          <div class="policy-item"><i class="fas fa-id-card"></i><span>Bring any previous dental X-rays or reports if available.</span></div>
+          <div class="policy-item"><i class="fas fa-baby"></i><span>For children under 12, please have a parent/guardian present.</span></div>
+          <div class="policy-item"><i class="fas fa-syringe"></i><span>Inform our team of any allergies or medical conditions beforehand.</span></div>
+        </div>
+
+        <div style="background:linear-gradient(135deg,#25D366,#128C7E);border-radius:var(--radius-lg);padding:var(--space-lg);color:white;margin-top:var(--space-md);text-align:center;" class="reveal-right delay-2">
+          <div style="font-size:1.5rem;margin-bottom:8px;">💬</div>
+          <div style="font-weight:700;margin-bottom:8px;">Prefer WhatsApp?</div>
+          <div style="font-size:0.82rem;opacity:0.85;margin-bottom:var(--space-md);">Chat directly with our team for quick appointment booking.</div>
+          <a href="https://wa.me/919843022094?text=Hi%20Dr.%20Srihari%2C%20I'd%20like%20to%20book%20an%20appointment." target="_blank" class="btn" style="background:white;color:#128C7E;font-weight:700;width:100%;justify-content:center;"><i class="fab fa-whatsapp"></i> Book on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div style="text-align:center;padding:var(--space-lg) 0;"><p style="font-size:0.85rem;">© 2024 S.N Dental Clinic · Dr. Srihari, MDS · R.S. Puram, Coimbatore</p></div></div></footer>
+
+<div class="whatsapp-float">
+  <div class="wa-chat-widget" id="waWidget"><div class="wa-chat-header"><div class="wa-chat-avatar">🦷</div><div><div class="wa-chat-name">S.N Dental Clinic</div><div class="wa-chat-status">Typically replies within minutes</div></div><button class="wa-chat-close" id="waClose">✕</button></div><div class="wa-chat-messages" id="waMessages"></div><div class="wa-chat-options" id="waOptions"></div><a class="wa-open-link" id="waOpenLink" target="_blank" href="https://wa.me/919843022094" style="display:none;"><i class="fab fa-whatsapp"></i> Open WhatsApp</a></div>
+  <button class="whatsapp-btn" id="waBtn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></button>
+</div>
+<button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+<script src="../js/main.js"></script>
+<script type="module">
+  import { bookAppointment } from '../js/api.js';
+  window._bookAppointment = bookAppointment;
+</script>
+<script>
+  // Set min date to tomorrow
+  const dateEl = document.getElementById('ap-date');
+  const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+  dateEl.min = tomorrow.toISOString().split('T')[0];
+  // Disable Sundays
+  dateEl?.addEventListener('input', function() {
+    const d = new Date(this.value);
+    if (d.getDay() === 0) { this.value = ''; showToast('Clinic is closed on Sundays. Please select another day.', 'error'); }
+  });
+
+  let selectedSlot = '';
+  const morningSlots = ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM'];
+  const eveningSlots = ['4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM','7:00 PM','7:30 PM'];
+
+  window.updateTimeSlots = function() {
+    const session = document.getElementById('ap-session').value;
+    const container = document.getElementById('timeSlots');
+    selectedSlot = '';
+    if (!session) { container.innerHTML = `<div style="color:var(--text-muted);font-size:0.85rem;grid-column:1/-1;padding:16px;text-align:center;">Select a session above.</div>`; return; }
+    const slots = session === 'morning' ? morningSlots : eveningSlots;
+    // Simulate some booked slots
+    const booked = [slots[2], slots[5]];
+    container.innerHTML = slots.map(s => `
+      <button class="time-slot${booked.includes(s) ? ' booked' : ''}" onclick="selectSlot('${s}', this)" ${booked.includes(s) ? 'disabled' : ''}>${s}</button>
+    `).join('');
+  };
+
+  window.selectSlot = function(slot, el) {
+    document.querySelectorAll('.time-slot.selected').forEach(s => s.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedSlot = slot;
+  };
+
+  let currentStep = 1;
+  window.nextStep = function(from) {
+    if (from === 1) {
+      const name = document.getElementById('ap-name').value.trim();
+      const phone = document.getElementById('ap-phone').value.trim();
+      const age = document.getElementById('ap-age').value;
+      const gender = document.getElementById('ap-gender').value;
+      if (!name) { document.getElementById('ap-name').classList.add('error'); showToast('Please enter your name.','error'); return; }
+      if (!phone || phone.replace(/\D/g,'').length < 10) { document.getElementById('ap-phone').classList.add('error'); showToast('Enter a valid mobile number.','error'); return; }
+      if (!age || +age < 1 || +age > 120) { showToast('Please enter a valid age.','error'); return; }
+      if (!gender) { showToast('Please select your gender.','error'); return; }
+    }
+    if (from === 2) {
+      const date = document.getElementById('ap-date').value;
+      const issue = document.getElementById('ap-issue').value;
+      if (!date) { showToast('Please select a preferred date.','error'); return; }
+      if (!selectedSlot) { showToast('Please select a time slot.','error'); return; }
+      if (!issue) { showToast('Please select the reason for your visit.','error'); return; }
+      buildReviewSummary();
+    }
+    goToStep(from + 1);
+  };
+  window.prevStep = (from) => goToStep(from - 1);
+
+  function goToStep(n) {
+    document.querySelectorAll('.form-step').forEach((el, i) => el.classList.toggle('active', i + 1 === n));
+    document.querySelectorAll('.step-item').forEach((el, i) => {
+      el.classList.toggle('active', i + 1 === n);
+      el.classList.toggle('done', i + 1 < n);
+    });
+    currentStep = n;
+  }
+
+  function buildReviewSummary() {
+    const rows = [
+      ['Patient Name', document.getElementById('ap-name').value],
+      ['Mobile', document.getElementById('ap-phone').value],
+      ['Age / Gender', `${document.getElementById('ap-age').value} yrs / ${document.getElementById('ap-gender').value}`],
+      ['Preferred Date', new Date(document.getElementById('ap-date').value).toDateString()],
+      ['Time Slot', selectedSlot],
+      ['Reason for Visit', document.getElementById('ap-issue').value],
+    ];
+    document.getElementById('reviewSummary').innerHTML = rows.map(([k, v]) => `
+      <div class="appt-summary-row"><span>${k}</span><span>${v}</span></div>
+    `).join('');
+  }
+
+  window.submitAppointment = async function() {
+    const btn = document.getElementById('submitApptBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    btn.disabled = true;
+
+    // Collect all form data
+    const apptData = {
+      name:    document.getElementById('ap-name').value.trim(),
+      phone:   document.getElementById('ap-phone').value.trim(),
+      email:   document.getElementById('ap-email').value.trim(),
+      age:     document.getElementById('ap-age').value,
+      gender:  document.getElementById('ap-gender').value,
+      date:    document.getElementById('ap-date').value,
+      session: document.getElementById('ap-session').value,
+      time:    selectedSlot,
+      issue:   document.getElementById('ap-issue').value,
+      notes:   document.getElementById('ap-notes').value.trim(),
+    };
+
+    let apptId, waUrl;
+    try {
+      // POST to Express backend
+      const bookFn = window._bookAppointment || null;
+      let result;
+      if (bookFn) {
+        result = await bookFn(apptData);
+        apptId = result.appointment.appointmentId;
+        waUrl  = result.whatsappUrl;
+      } else {
+        throw new Error('API not ready');
+      }
+    } catch (err) {
+      // Graceful fallback to localStorage if server unreachable
+      console.warn('[Fallback] Server offline, saving locally:', err.message);
+      apptId = 'SN-' + Date.now().toString().slice(-6);
+      const all = JSON.parse(localStorage.getItem('sn_appointments') || '[]');
+      all.unshift({ id: apptId, appointmentId: apptId, ...apptData, status: 'pending', createdAt: new Date().toISOString() });
+      localStorage.setItem('sn_appointments', JSON.stringify(all));
+      waUrl = `https://wa.me/919843022094?text=${encodeURIComponent(
+        'Hi Dr. Srihari 👋\n\nAppointment Request:\n' +
+        `📋 ID: ${apptId}\n👤 Name: ${apptData.name}\n📅 Date: ${new Date(apptData.date).toDateString()}\n⏰ Time: ${apptData.time}\n🦷 Issue: ${apptData.issue}\n\nPlease confirm my slot!`
+      )}`;
+    }
+
+    // Show appointment ID
+    document.getElementById('apptIdDisplay').textContent = apptId;
+
+    // Build final summary
+    const rows = [
+      ['Appointment ID', apptId],
+      ['Patient',  apptData.name],
+      ['Mobile',   apptData.phone],
+      ['Date',     new Date(apptData.date).toDateString()],
+      ['Time',     apptData.time],
+      ['Issue',    apptData.issue],
+      ['Status',   '⏳ Pending Confirmation'],
+    ];
+    document.getElementById('apptSummary').innerHTML = rows.map(([k,v]) =>
+      `<div class="appt-summary-row"><span>${k}</span><span>${v}</span></div>`).join('');
+
+    // Show success screen
+    document.querySelectorAll('.form-step, .steps-indicator').forEach(el => el.style.display = 'none');
+    document.getElementById('successScreen').style.display = 'block';
+    showToast("Appointment booked! We'll WhatsApp you to confirm. 🦷", 'success', 7000);
+
+    // Show WhatsApp button with pre-filled message
+    setTimeout(() => {
+      const waLink = document.getElementById('waOpenLink');
+      waLink.href = waUrl || `https://wa.me/919843022094`;
+      waLink.style.display = 'flex';
+    }, 1500);
+  };
+</script>
+</body>
+</html>
+

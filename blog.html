@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dental Health Blog | S.N Dental Clinic — Dr. Srihari, Coimbatore</title>
+  <meta name="description" content="Expert dental health tips, oral hygiene advice, and treatment guides from Dr. Srihari at S.N Dental Clinic, Coimbatore.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <style>
+    .blog-hero-card {
+      background: var(--gradient-hero);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-xl);
+      align-items: center;
+      margin-bottom: var(--space-3xl);
+    }
+    .blog-hero-card h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: var(--space-sm); }
+    .blog-hero-card p { opacity: 0.8; line-height: 1.7; }
+    .blog-hero-img { font-size: 6rem; }
+
+    .blog-category-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .cat-hygiene { background: rgba(16,185,129,0.1); color: #059669; }
+    .cat-cosmetic { background: rgba(14,165,233,0.1); color: var(--primary-dark); }
+    .cat-child { background: rgba(245,158,11,0.1); color: #D97706; }
+    .cat-implants { background: rgba(139,92,246,0.1); color: #7C3AED; }
+    .cat-emergency { background: rgba(239,68,68,0.1); color: #DC2626; }
+    .cat-general { background: rgba(107,114,128,0.1); color: #4B5563; }
+
+    .blog-grid { display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-xl); }
+    .blog-main { display: flex; flex-direction: column; gap: var(--space-xl); }
+
+    .blog-post-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0,0,0,0.06);
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      transition: all var(--transition-base);
+    }
+    .blog-post-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
+    .blog-post-img {
+      aspect-ratio: 1;
+      background: var(--gradient-primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .blog-post-body { padding: var(--space-lg); }
+    .blog-post-meta { display: flex; gap: var(--space-md); align-items: center; flex-wrap: wrap; margin-bottom: var(--space-sm); }
+    .blog-post-meta span { font-size: 0.75rem; color: var(--text-muted); }
+    .blog-post-body h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: var(--space-sm); color: var(--text-dark); line-height: 1.4; }
+    .blog-post-body p { font-size: 0.85rem; color: var(--text-light); line-height: 1.7; }
+    .blog-post-read { font-size: 0.82rem; font-weight: 600; color: var(--primary); margin-top: var(--space-md); display: inline-flex; align-items: center; gap: 4px; }
+
+    .blog-sidebar { display: flex; flex-direction: column; gap: var(--space-lg); }
+    .sidebar-card { background: white; border-radius: var(--radius-lg); padding: var(--space-xl); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.06); }
+    .sidebar-title { font-weight: 700; font-size: 1rem; margin-bottom: var(--space-md); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--accent-dark); }
+    .cat-list { display: flex; flex-direction: column; gap: var(--space-sm); }
+    .cat-list a { font-size: 0.88rem; color: var(--text-medium); display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.05); transition: color var(--transition-fast); }
+    .cat-list a:hover { color: var(--primary); }
+    .cat-count { background: var(--primary-glow); color: var(--primary-dark); padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 700; }
+
+    @media (max-width: 968px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-hero-card { grid-template-columns: 1fr; }
+      .blog-hero-img { display: none; }
+      .blog-post-card { grid-template-columns: 1fr; }
+      .blog-post-img { aspect-ratio: 16/7; }
+    }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div style="text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:white;margin-bottom:16px;">S.N Dental Clinic</div><div class="loader-ring"></div></div></div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><div class="nav-logo-icon">🦷</div><div class="nav-logo-text"><span class="nav-logo-name">S.N Dental Clinic</span><span class="nav-logo-sub">Dr. Srihari · Periodontist</span></div></a>
+    <div class="nav-menu" id="navMenu">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="testimonials.html" class="nav-link">Testimonials</a>
+      <a href="blog.html" class="nav-link active">Blog</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="appointment.html" class="nav-link nav-cta">📅 Book Appointment</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="section-tag" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.9);display:inline-flex;margin-bottom:var(--space-md);"><i class="fas fa-newspaper"></i> Dental Health Tips</div>
+      <h1>Dental Health Blog</h1>
+      <p>Expert advice, oral hygiene tips, and dental health guides from Dr. Srihari.</p>
+      <div class="breadcrumb"><a href="../index.html">Home</a><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i><span>Blog</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Featured Post -->
+    <div class="blog-hero-card reveal">
+      <div>
+        <div class="blog-category-tag cat-implants" style="margin-bottom:var(--space-md);"><i class="fas fa-tooth"></i> Featured Article</div>
+        <h2>Understanding Dental Implants: Are You the Right Candidate?</h2>
+        <p>Dental implants have revolutionized restorative dentistry. Dr. Srihari explains who qualifies, what to expect, and how to care for implants long-term.</p>
+        <div style="display:flex;align-items:center;gap:var(--space-md);margin-top:var(--space-lg);">
+          <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;">👨‍⚕️</div>
+          <div><div style="font-weight:700;font-size:0.9rem;">Dr. Srihari</div><div style="font-size:0.75rem;opacity:0.7;">June 10, 2024 · 5 min read</div></div>
+        </div>
+        <a href="#blog-post-1" class="btn btn-ghost" style="margin-top:var(--space-lg);">Read Full Article <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="blog-hero-img">🦷</div>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="blog-grid">
+      <div class="blog-main">
+
+        <div class="blog-post-card reveal" id="blog-post-1">
+          <div class="blog-post-img">🦷</div>
+          <div class="blog-post-body">
+            <div class="blog-post-meta">
+              <span class="blog-category-tag cat-implants"><i class="fas fa-tooth"></i> Implants</span>
+              <span><i class="fas fa-clock"></i> 5 min read</span>
+              <span><i class="fas fa-calendar"></i> Jun 10, 2024</span>
+            </div>
+            <h3>Understanding Dental Implants: Are You the Right Candidate?</h3>
+            <p>Dental implants are the gold standard for missing teeth replacement. But not everyone is immediately eligible. Dr. Srihari breaks down the criteria, process, and what makes implants so successful...</p>
+            <span class="blog-post-read">Read More <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="blog-post-card reveal delay-1">
+          <div class="blog-post-img" style="background:linear-gradient(135deg,#10B981,#059669);">🦠</div>
+          <div class="blog-post-body">
+            <div class="blog-post-meta">
+              <span class="blog-category-tag cat-hygiene"><i class="fas fa-hand-sparkles"></i> Oral Hygiene</span>
+              <span><i class="fas fa-clock"></i> 4 min read</span>
+              <span><i class="fas fa-calendar"></i> May 28, 2024</span>
+            </div>
+            <h3>10 Oral Hygiene Habits That Will Transform Your Dental Health</h3>
+            <p>Most people brush twice daily — but that's just the beginning. Dr. Srihari shares the 10 habits that his patients with the best oral health consistently follow...</p>
+            <span class="blog-post-read">Read More <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="blog-post-card reveal delay-2">
+          <div class="blog-post-img" style="background:linear-gradient(135deg,#F59E0B,#D97706);">✨</div>
+          <div class="blog-post-body">
+            <div class="blog-post-meta">
+              <span class="blog-category-tag cat-cosmetic"><i class="fas fa-smile"></i> Cosmetic</span>
+              <span><i class="fas fa-clock"></i> 3 min read</span>
+              <span><i class="fas fa-calendar"></i> May 15, 2024</span>
+            </div>
+            <h3>Teeth Whitening: Myths vs. Reality — What Actually Works?</h3>
+            <p>From charcoal toothpaste to banana peels — the internet is full of whitening hacks. Dr. Srihari separates fact from fiction and explains what science says about professional whitening...</p>
+            <span class="blog-post-read">Read More <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="blog-post-card reveal delay-3">
+          <div class="blog-post-img" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);">🩺</div>
+          <div class="blog-post-body">
+            <div class="blog-post-meta">
+              <span class="blog-category-tag cat-general"><i class="fas fa-teeth-open"></i> Gum Health</span>
+              <span><i class="fas fa-clock"></i> 6 min read</span>
+              <span><i class="fas fa-calendar"></i> Apr 30, 2024</span>
+            </div>
+            <h3>Bleeding Gums: When Should You Be Worried?</h3>
+            <p>Bleeding gums during brushing is never normal. It's usually the first sign of gum disease (periodontitis). Dr. Srihari explains causes, stages, and when you need urgent treatment...</p>
+            <span class="blog-post-read">Read More <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="blog-post-card reveal delay-1">
+          <div class="blog-post-img" style="background:linear-gradient(135deg,#F59E0B,#0EA5E9);">👶</div>
+          <div class="blog-post-body">
+            <div class="blog-post-meta">
+              <span class="blog-category-tag cat-child"><i class="fas fa-child"></i> Child Dental</span>
+              <span><i class="fas fa-clock"></i> 4 min read</span>
+              <span><i class="fas fa-calendar"></i> Apr 12, 2024</span>
+            </div>
+            <h3>When Should Your Child's First Dental Visit Be?</h3>
+            <p>The American Academy of Pediatric Dentistry recommends a first visit within 6 months of the first tooth. Dr. Srihari explains why early dental visits are crucial for lifelong oral health...</p>
+            <span class="blog-post-read">Read More <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="blog-post-card reveal delay-2">
+          <div class="blog-post-img" style="background:linear-gradient(135deg,#EF4444,#DC2626);">🚨</div>
+          <div class="blog-post-body">
+            <div class="blog-post-meta">
+              <span class="blog-category-tag cat-emergency"><i class="fas fa-first-aid"></i> Emergency</span>
+              <span><i class="fas fa-clock"></i> 3 min read</span>
+              <span><i class="fas fa-calendar"></i> Mar 20, 2024</span>
+            </div>
+            <h3>Knocked Out a Tooth? Here's What to Do in the Next 30 Minutes</h3>
+            <p>A knocked-out tooth (avulsed tooth) is a dental emergency. If you act within 30 minutes, there's a chance to save it. Dr. Srihari's step-by-step emergency guide could save your tooth...</p>
+            <span class="blog-post-read">Read More <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="blog-sidebar">
+        <!-- Search -->
+        <div class="sidebar-card reveal-right">
+          <div class="sidebar-title">🔍 Search Articles</div>
+          <div style="display:flex;gap:8px;">
+            <input type="text" class="form-control" placeholder="Search blog..." style="flex:1;">
+            <button class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="sidebar-card reveal-right delay-1">
+          <div class="sidebar-title">📂 Categories</div>
+          <div class="cat-list">
+            <a href="#">Oral Hygiene <span class="cat-count">8</span></a>
+            <a href="#">Dental Implants <span class="cat-count">6</span></a>
+            <a href="#">Gum Health <span class="cat-count">5</span></a>
+            <a href="#">Cosmetic Dentistry <span class="cat-count">4</span></a>
+            <a href="#">Child Dental Care <span class="cat-count">3</span></a>
+            <a href="#">Emergency Dental <span class="cat-count">3</span></a>
+          </div>
+        </div>
+
+        <!-- CTA Card -->
+        <div class="sidebar-card reveal-right delay-2" style="background:var(--gradient-primary);color:white;">
+          <div style="font-size:2rem;margin-bottom:12px;">📅</div>
+          <div style="font-weight:700;font-size:1rem;margin-bottom:8px;">Book a Consultation</div>
+          <div style="font-size:0.82rem;opacity:0.85;margin-bottom:var(--space-lg);">Get personalized advice from Dr. Srihari for your dental concerns.</div>
+          <a href="appointment.html" class="btn" style="background:white;color:var(--primary);font-weight:700;width:100%;justify-content:center;" id="blog-book-btn"><i class="fas fa-calendar-check"></i> Book Now</a>
+        </div>
+
+        <!-- Popular Posts -->
+        <div class="sidebar-card reveal-right delay-3">
+          <div class="sidebar-title">🔥 Popular Posts</div>
+          <div style="display:flex;flex-direction:column;gap:var(--space-md);">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div style="width:48px;height:48px;border-radius:8px;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🦷</div>
+              <div><div style="font-size:0.85rem;font-weight:600;color:var(--text-dark);">Are Dental Implants Worth the Cost?</div><div style="font-size:0.72rem;color:var(--text-muted);">4.2k views</div></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div style="width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#F59E0B,#D97706);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">✨</div>
+              <div><div style="font-size:0.85rem;font-weight:600;color:var(--text-dark);">Home Remedies for Toothache</div><div style="font-size:0.72rem;color:var(--text-muted);">3.8k views</div></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div style="width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#10B981,#059669);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🩺</div>
+              <div><div style="font-size:0.85rem;font-weight:600;color:var(--text-dark);">How Often Should You Visit the Dentist?</div><div style="font-size:0.72rem;color:var(--text-muted);">2.9k views</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container"><div style="text-align:center;padding:var(--space-lg) 0;"><p style="font-size:0.85rem;">© 2024 S.N Dental Clinic · Dr. Srihari, MDS · R.S. Puram, Coimbatore</p></div></div></footer>
+
+<div class="whatsapp-float">
+  <div class="wa-chat-widget" id="waWidget"><div class="wa-chat-header"><div class="wa-chat-avatar">🦷</div><div><div class="wa-chat-name">S.N Dental Clinic</div><div class="wa-chat-status">Typically replies within minutes</div></div><button class="wa-chat-close" id="waClose">✕</button></div><div class="wa-chat-messages" id="waMessages"></div><div class="wa-chat-options" id="waOptions"></div><a class="wa-open-link" id="waOpenLink" target="_blank" href="https://wa.me/919843022094" style="display:none;"><i class="fab fa-whatsapp"></i> Open WhatsApp</a></div>
+  <button class="whatsapp-btn" id="waBtn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></button>
+</div>
+<button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+<script src="../js/main.js"></script>
+</body>
+</html>
+
