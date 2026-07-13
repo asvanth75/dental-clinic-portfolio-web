@@ -1,29 +1,18 @@
 {
-  "name": "wrappy",
-  "version": "1.0.2",
-  "description": "Callback wrapping utility",
-  "main": "wrappy.js",
-  "files": [
-    "wrappy.js"
-  ],
-  "directories": {
-    "test": "test"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "tap": "^2.3.1"
-  },
+  "name": "sn-dental-clinic",
+  "version": "1.0.0",
+  "description": "S.N Dental Clinic — Dr. Srihari, MDS Periodontist, R.S. Puram, Coimbatore",
+  "main": "api/index.js",
   "scripts": {
-    "test": "tap --coverage test/*.js"
+    "start": "node api/index.js",
+    "dev": "node --watch api/index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/npm/wrappy"
-  },
-  "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
+  "keywords": ["dental", "clinic", "coimbatore", "periodontist"],
+  "author": "S.N Dental Clinic — Dr. Srihari",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/npm/wrappy/issues"
-  },
-  "homepage": "https://github.com/npm/wrappy"
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "uuid": "^14.0.1"
+  }
 }

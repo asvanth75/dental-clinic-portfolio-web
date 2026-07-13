@@ -1,36 +1,100 @@
-# wrappy
+# S.N Dental Clinic — Dr. Srihari
 
-Callback wrapping utility
+> Professional dental clinic portfolio website for **Dr. Srihari**, MDS Periodontist with 25+ years of experience at **S.N Dental Clinic**, R.S. Puram, Coimbatore.
 
-## USAGE
+🌐 **Live:** [dental-clinic-portfolio-web.vercel.app](https://dental-clinic-portfolio-web.vercel.app)
 
-```javascript
-var wrappy = require("wrappy")
+---
 
-// var wrapper = wrappy(wrapperFunction)
+## 📁 Project Structure
 
-// make sure a cb is called only once
-// See also: http://npm.im/once for this specific use case
-var once = wrappy(function (cb) {
-  var called = false
-  return function () {
-    if (called) return
-    called = true
-    return cb.apply(this, arguments)
-  }
-})
+```
+dental-clinic-portfolio-web/
+|
+|-- index.html                  # Homepage (hero, stats, services, map, CTA)
+|-- api/
+|   `-- index.js                # Express.js backend API (Vercel Serverless entrypoint)
+|-- package.json
+|-- sitemap.xml
+|-- robots.txt
+|-- vercel.json                 # Vercel serverless routing config
+|-- firebase.json               # Firebase hosting config
+|-- README.md
+|
+|-- pages/
+|   |-- about.html              # Doctor profile & qualifications
+|   |-- services.html           # 12 dental treatments
+|   |-- gallery.html            # Filterable image gallery
+|   |-- testimonials.html       # Patient reviews (100/100 Practo)
+|   |-- blog.html               # Dental health articles
+|   |-- appointment.html        # 3-step booking wizard
+|   `-- contact.html            # Contact form & Google Maps
+|
+|-- css/
+|   |-- main.css                # Design tokens & typography
+|   |-- components.css          # Navbar, cards, forms, footer
+|   `-- animations.css          # Scroll reveals, WhatsApp widget
+|
+|-- js/
+|   |-- main.js                 # Global logic & WhatsApp bot
+|   |-- api.js                  # Frontend API client
+|   `-- firebase-config.js      # Firebase + localStorage dual mode
+|
+`-- images/
+    |-- hero_bg.png
+    |-- doctor_portrait.png
+    |-- clinic_interior.png
+    `-- dental_services.png
+```
 
-function printBoo () {
-  console.log('boo')
-}
-// has some rando property
-printBoo.iAmBooPrinter = true
+---
 
-var onlyPrintOnce = once(printBoo)
+## ✨ Features
 
-onlyPrintOnce() // prints 'boo'
-onlyPrintOnce() // does nothing
+- **Premium UI** - Glassmorphism, smooth animations, mobile-first responsive design
+- **WhatsApp Bot** - Floating chat widget with appointment booking conversation flow
+- **Appointment System** - 3-step booking wizard with time slot selection and auto ID generation
+- **Express Backend** - REST API for appointments and contact messages stored in `data/db.json`
+- **Firebase Ready** - Toggle `FIREBASE_ENABLED = true` in `js/firebase-config.js` to upgrade to Firestore
+- **SEO Optimised** - Schema.org markup, Open Graph, sitemap.xml, robots.txt, meta tags per page
 
-// random property is retained!
-assert.equal(onlyPrintOnce.iAmBooPrinter, true)
+---
+
+## 🚀 Running Locally
+
+```bash
+# Install dependencies
+npm install
+
+# Start the server (serves frontend + backend together on port 3001)
+npm start
+```
+
+Open **http://localhost:3001** in your browser.
+
+---
+
+## 🔑 Clinic Details
+
+| | |
+|--|--|
+| **Doctor** | Dr. Srihari |
+| **Specialisation** | Periodontist & Implantologist |
+| **Qualification** | MDS — Rajah Muthiah Dental College (2001) |
+| **Experience** | 25+ Years |
+| **Phone** | +91 98430 22094 |
+| **Clinic** | S.N Dental Clinic, #30 D.B. Road, R.S. Puram, Coimbatore |
+| **Rating** | 100/100 on Practo ⭐ |
+
+---
+
+## 🌐 Deployment
+
+**Vercel** — Import this repo at [vercel.com](https://vercel.com) and set output directory to `.`
+
+**Firebase Hosting:**
+```bash
+npm install -g firebase-tools
+firebase login
+firebase deploy --only hosting
 ```

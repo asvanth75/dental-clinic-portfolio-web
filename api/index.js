@@ -1,18 +1,6 @@
 /**
- * S.N Dental Clinic — Express Backend API
- * Port: 3001
- *
- * Routes:
- *   POST /api/appointments      — Create appointment
- *   GET  /api/appointments      — List appointments
- *   PATCH /api/appointments/:id — Update status
- *   DELETE /api/appointments/:id
- *
- *   POST /api/contact           — Contact message
- *   GET  /api/contact           — List messages
- *
- *   GET  /api/stats             — Dashboard summary
- *   GET  /api/health            — Health check
+ * S.N Dental Clinic — Express Backend API (Vercel Serverless Function)
+ * Paths adjusted to serve from parent directory when running serverlessly or locally.
  */
 
 const express = require('express');
@@ -29,8 +17,8 @@ app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve all static frontend files from root
-app.use(express.static(path.join(__dirname)));
+// Serve all static frontend files from parent directory
+app.use(express.static(path.join(__dirname, '..')));
 
 // Request logger
 app.use((req, res, next) => {
@@ -40,8 +28,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// ── JSON File DB ──────────────────────────────────
-const DB_DIR  = process.env.VERCEL ? '/tmp' : path.join(__dirname, 'data');
+// ── JSON File DB (Uses /tmp on Vercel, parent folder locally) ──────────────────
+const DB_DIR  = process.env.VERCEL ? '/tmp' : path.join(__dirname, '..', 'data');
 const DB_FILE = path.join(DB_DIR, 'db.json');
 
 if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
@@ -243,7 +231,7 @@ app.get('/api/settings', (req, res) => {
 
 // ── Catch-all: serve index.html for non-API routes ─
 app.get(/^(?!\/api).*/, (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
 // ── Start ─────────────────────────────────────────
@@ -270,4 +258,3 @@ if (!process.env.VERCEL) {
 }
 
 module.exports = app;
-
