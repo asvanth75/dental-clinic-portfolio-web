@@ -1,124 +1,50 @@
-# S.N Dental Clinic — Dr. Srihari
+# math-intrinsics <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
 
-> Professional dental clinic portfolio website for **Dr. Srihari**, MDS Periodontist with 25+ years of experience at **S.N Dental Clinic**, R.S. Puram, Coimbatore.
+[![github actions][actions-image]][actions-url]
+[![coverage][codecov-image]][codecov-url]
+[![License][license-image]][license-url]
+[![Downloads][downloads-image]][downloads-url]
 
-**Live:** [dental-clinic-portfolio-web.vercel.app](https://dental-clinic-portfolio-web.vercel.app)
+[![npm badge][npm-badge-png]][package-url]
 
----
+ES Math-related intrinsics and helpers, robustly cached.
 
-## Project Structure
+ - `abs`
+ - `floor`
+ - `isFinite`
+ - `isInteger`
+ - `isNaN`
+ - `isNegativeZero`
+ - `max`
+ - `min`
+ - `mod`
+ - `pow`
+ - `round`
+ - `sign`
+ - `constants/maxArrayLength`
+ - `constants/maxSafeInteger`
+ - `constants/maxValue`
 
-```
-dental-clinic-portfolio-web/
-|
-|-- index.html                  # Homepage (hero, stats, services, map, CTA)
-|-- server.js                   # Express.js backend API (port 3001)
-|-- package.json
-|-- sitemap.xml
-|-- robots.txt
-|-- firebase.json               # Firebase hosting config
-|-- README.md
-|
-|-- pages/
-|   |-- about.html              # Doctor profile & qualifications
-|   |-- services.html           # 12 dental treatments
-|   |-- gallery.html            # Filterable image gallery
-|   |-- testimonials.html       # Patient reviews (100/100 Practo)
-|   |-- blog.html               # Dental health articles
-|   |-- appointment.html        # 3-step booking wizard
-|   `-- contact.html            # Contact form & Google Maps
-|
-|-- css/
-|   |-- main.css                # Design tokens & typography
-|   |-- components.css          # Navbar, cards, forms, footer
-|   `-- animations.css          # Scroll reveals, WhatsApp widget
-|
-|-- js/
-|   |-- main.js                 # Global logic & WhatsApp bot
-|   |-- api.js                  # Frontend API client
-|   `-- firebase-config.js      # Firebase + localStorage dual mode
-|
-`-- images/
-    |-- hero_bg.png
-    |-- doctor_portrait.png
-    |-- clinic_interior.png
-    `-- dental_services.png
-```
 
----
+## Tests
+Simply clone the repo, `npm install`, and run `npm test`
 
-## Features
+## Security
 
-- **Premium UI** - Glassmorphism, smooth animations, mobile-first responsive design
-- **WhatsApp Bot** - Floating chat widget with appointment booking conversation flow
-- **Appointment System** - 3-step booking wizard with time slot selection and auto ID generation
-- **Express Backend** - REST API for appointments and contact messages stored in `data/db.json`
-- **Firebase Ready** - Toggle `FIREBASE_ENABLED = true` in `js/firebase-config.js` to upgrade to Firestore
-- **SEO Optimised** - Schema.org markup, Open Graph, sitemap.xml, robots.txt, meta tags per page
+Please email [@ljharb](https://github.com/ljharb) or see https://tidelift.com/security if you have a potential security vulnerability to report.
 
----
-
-## Running Locally
-
-```bash
-# Install dependencies
-npm install
-
-# Start the server (serves frontend + backend together on port 3001)
-npm start
-```
-
-Open **http://localhost:3001** in your browser.
-
----
-
-## API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/health` | Health check |
-| POST | `/api/appointments` | Create appointment |
-| GET | `/api/appointments` | List all appointments |
-| PATCH | `/api/appointments/:id` | Update appointment status |
-| DELETE | `/api/appointments/:id` | Delete appointment |
-| POST | `/api/contact` | Submit contact message |
-| GET | `/api/contact` | List contact messages |
-| GET | `/api/stats` | Dashboard summary |
-
----
-
-## Clinic Details
-
-| Field | Info |
-|-------|------|
-| Doctor | Dr. Srihari |
-| Specialisation | Periodontist & Implantologist |
-| Qualification | MDS — Rajah Muthiah Dental College (2001) |
-| Experience | 25+ Years |
-| Phone | +91 98430 22094 |
-| Landline | 0422-2541647 |
-| Clinic | S.N Dental Clinic, #30 D.B. Road, R.S. Puram, Coimbatore - 641002 |
-| Rating | 100/100 on Practo |
-
----
-
-## Deployment
-
-**Vercel** — Import this repo at [vercel.com](https://vercel.com) and set output directory to `.`
-
-**Firebase Hosting:**
-```bash
-npm install -g firebase-tools
-firebase login
-firebase deploy --only hosting
-```
-
----
-
-## Tech Stack
-
-- **Frontend** - HTML5, CSS3, Vanilla JavaScript (ES Modules)
-- **Backend** - Node.js, Express.js
-- **Database** - JSON file store (`data/db.json`) / Firebase Firestore (optional)
-- **Fonts** - Google Fonts (Inter, Playfair Display)
-- **Icons** - Font Awesome 6
+[package-url]: https://npmjs.org/package/math-intrinsics
+[npm-version-svg]: https://versionbadg.es/es-shims/math-intrinsics.svg
+[deps-svg]: https://david-dm.org/es-shims/math-intrinsics.svg
+[deps-url]: https://david-dm.org/es-shims/math-intrinsics
+[dev-deps-svg]: https://david-dm.org/es-shims/math-intrinsics/dev-status.svg
+[dev-deps-url]: https://david-dm.org/es-shims/math-intrinsics#info=devDependencies
+[npm-badge-png]: https://nodei.co/npm/math-intrinsics.png?downloads=true&stars=true
+[license-image]: https://img.shields.io/npm/l/math-intrinsics.svg
+[license-url]: LICENSE
+[downloads-image]: https://img.shields.io/npm/dm/es-object.svg
+[downloads-url]: https://npm-stat.com/charts.html?package=math-intrinsics
+[codecov-image]: https://codecov.io/gh/es-shims/math-intrinsics/branch/main/graphs/badge.svg
+[codecov-url]: https://app.codecov.io/gh/es-shims/math-intrinsics/
+[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/es-shims/math-intrinsics
+[actions-url]: https://github.com/es-shims/math-intrinsics/actions
