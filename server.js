@@ -1,4 +1,4 @@
-﻿/**
+/**
  * S.N Dental Clinic — Express Backend API
  * Port: 3001
  *
@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 });
 
 // ── JSON File DB ──────────────────────────────────
-const DB_DIR  = path.join(__dirname, 'data');
+const DB_DIR  = process.env.VERCEL ? '/tmp' : path.join(__dirname, 'data');
 const DB_FILE = path.join(DB_DIR, 'db.json');
 
 if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
@@ -247,23 +247,27 @@ app.get(/^(?!\/api).*/, (req, res) => {
 });
 
 // ── Start ─────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log('');
-  console.log('╔═════════════════════════════════════════════╗');
-  console.log('║   🦷  S.N DENTAL CLINIC — SERVER RUNNING    ║');
-  console.log('╠═════════════════════════════════════════════╣');
-  console.log(`║  Frontend  →  http://localhost:${PORT}          ║`);
-  console.log(`║  API Base  →  http://localhost:${PORT}/api      ║`);
-  console.log('║                                             ║');
-  console.log('║  Endpoints:                                 ║');
-  console.log('║    GET  /api/health                         ║');
-  console.log('║    POST /api/appointments                   ║');
-  console.log('║    GET  /api/appointments                   ║');
-  console.log('║    POST /api/contact                        ║');
-  console.log('║    GET  /api/stats                          ║');
-  console.log('║                                             ║');
-  console.log(`║  Data stored in: data/db.json               ║`);
-  console.log('╚═════════════════════════════════════════════╝');
-  console.log('');
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log('');
+    console.log('╔═════════════════════════════════════════════╗');
+    console.log('║   🦷  S.N DENTAL CLINIC — SERVER RUNNING    ║');
+    console.log('╠═════════════════════════════════════════════╣');
+    console.log(`║  Frontend  →  http://localhost:${PORT}          ║`);
+    console.log(`║  API Base  →  http://localhost:${PORT}/api      ║`);
+    console.log('║                                             ║');
+    console.log('║  Endpoints:                                 ║');
+    console.log('║    GET  /api/health                         ║');
+    console.log('║    POST /api/appointments                   ║');
+    console.log('║    GET  /api/appointments                   ║');
+    console.log('║    POST /api/contact                        ║');
+    console.log('║    GET  /api/stats                          ║');
+    console.log('║                                             ║');
+    console.log(`║  Data stored in: data/db.json               ║`);
+    console.log('╚═════════════════════════════════════════════╝');
+    console.log('');
+  });
+}
+
+module.exports = app;
 
