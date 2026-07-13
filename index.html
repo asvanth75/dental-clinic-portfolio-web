@@ -1,0 +1,950 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S.N Dental Clinic | Dr. Srihari — Periodontist in R.S. Puram, Coimbatore</title>
+  <meta name="description" content="Dr. Srihari — Expert Periodontist & Dentist with 25+ years of experience in Coimbatore. S.N Dental Clinic at R.S. Puram offers Dental Implants, Teeth Whitening, Braces, Root Canal & more. Book your appointment today!">
+  <meta name="keywords" content="dentist Coimbatore, periodontist Coimbatore, dental clinic RS Puram, dental implants Coimbatore, teeth whitening, braces, Dr Srihari dentist">
+  <meta name="author" content="S.N Dental Clinic">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="S.N Dental Clinic | Dr. Srihari — Periodontist, Coimbatore">
+  <meta property="og:description" content="Expert dental care with 25+ years of experience. Book your appointment today!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/doctor_portrait.png">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    "name": "S.N Dental Clinic",
+    "description": "Expert Periodontist Dr. Srihari with 25+ years of experience in Coimbatore",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "#30, D B Road, Opposite To Rajasthan Sangh",
+      "addressLocality": "R.S. Puram",
+      "addressRegion": "Coimbatore",
+      "addressCountry": "IN"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 11.011399, "longitude": 76.950346 },
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "11" },
+    "openingHours": ["Mo-Sa 09:00-13:00", "Mo-Sa 16:00-20:00"],
+    "priceRange": "₹₹"
+  }
+  </script>
+
+  <link rel="canonical" href="https://yourdomain.com/">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <style>
+    /* ── HOME-SPECIFIC STYLES ── */
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      background: var(--gradient-hero);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0; right: 0;
+      height: 80px;
+      background: white;
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .hero-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(14,165,233,0.12) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .hero-gradient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .orb-1 {
+      width: 500px; height: 500px;
+      background: rgba(14,165,233,0.15);
+      top: -100px; right: -100px;
+      animation: float 8s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 300px; height: 300px;
+      background: rgba(56,189,248,0.1);
+      bottom: 100px; left: -50px;
+      animation: float 6s ease-in-out infinite 2s;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      padding-top: var(--nav-height);
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(14,165,233,0.2);
+      border: 1px solid rgba(14,165,233,0.3);
+      color: #93C5FD;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: var(--space-lg);
+      backdrop-filter: blur(8px);
+    }
+    .hero-badge .pulse-dot {
+      width: 8px; height: 8px;
+      background: #4ADE80;
+      border-radius: 50%;
+      animation: pulse 1.5s ease-in-out infinite;
+      box-shadow: 0 0 0 3px rgba(74,222,128,0.3);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      color: white;
+      line-height: 1.15;
+      margin-bottom: var(--space-lg);
+      font-weight: 800;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, #38BDF8, #7DD3FC);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: var(--space-xl);
+      max-width: 500px;
+    }
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      margin-bottom: var(--space-2xl);
+    }
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .trust-item i { color: var(--primary-light); }
+
+    /* Hero Image Side */
+    .hero-img-side {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .hero-img-frame {
+      position: relative;
+      width: 420px;
+      height: 520px;
+    }
+    .hero-img-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(14,165,233,0.3), rgba(2,132,199,0.2));
+      border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+      animation: floatSlow 6s ease-in-out infinite;
+    }
+    .hero-img-frame img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 40% 60% 60% 40% / 50% 50% 60% 40%;
+      filter: drop-shadow(0 20px 60px rgba(14,165,233,0.3));
+    }
+    .hero-floating-card {
+      position: absolute;
+      background: rgba(255,255,255,0.95);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      box-shadow: var(--shadow-xl);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 2;
+      animation: float 4s ease-in-out infinite;
+    }
+    .hero-floating-card.card-1 { left: -20px; top: 80px; animation-delay: 0s; }
+    .hero-floating-card.card-2 { right: -20px; bottom: 120px; animation-delay: 1.5s; }
+    .hero-card-icon { font-size: 1.5rem; }
+    .hero-card-text strong { display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-dark); }
+    .hero-card-text span { font-size: 0.72rem; color: var(--text-light); }
+
+    /* Stats Section */
+    .stats-section {
+      background: var(--gradient-primary);
+      padding: var(--space-3xl) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .stats-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-lg);
+      position: relative;
+    }
+
+    /* Services Section */
+    .services-section { background: var(--bg-section); }
+
+    /* Why Choose Us */
+    .why-us-section {
+      background: white;
+      position: relative;
+    }
+    .why-us-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4xl);
+      align-items: center;
+    }
+    .why-us-img {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      aspect-ratio: 4/5;
+      position: relative;
+    }
+    .why-us-img img { width: 100%; height: 100%; object-fit: cover; }
+    .why-us-badge {
+      position: absolute;
+      bottom: var(--space-xl);
+      left: var(--space-xl);
+      background: white;
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: var(--shadow-lg);
+    }
+    .why-us-badge .rating { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+    .why-features { display: flex; flex-direction: column; gap: var(--space-lg); margin-top: var(--space-xl); }
+    .why-feature-item {
+      display: flex;
+      gap: var(--space-md);
+      align-items: flex-start;
+      padding: var(--space-lg);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(14,165,233,0.08);
+      transition: all var(--transition-base);
+    }
+    .why-feature-item:hover { background: var(--bg-light); border-color: var(--primary); transform: translateX(4px); }
+    .why-feature-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: var(--primary-glow);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      transition: all var(--transition-bounce);
+    }
+    .why-feature-item:hover .why-feature-icon { background: var(--gradient-primary); }
+    .why-feature-item:hover .why-feature-icon i { filter: brightness(0) invert(1); }
+    .why-feature-content h4 { font-weight: 700; margin-bottom: 4px; }
+    .why-feature-content p { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; }
+
+    /* Testimonials */
+    .testimonials-section { background: var(--bg-section); }
+    .swiper { padding-bottom: 50px !important; }
+    .swiper-pagination-bullet-active { background: var(--primary) !important; }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--gradient-hero);
+      padding: var(--space-4xl) 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230EA5E9' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-section-inner { position: relative; z-index: 1; }
+    .cta-section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: white;
+      margin-bottom: var(--space-md);
+    }
+    .cta-section p { color: rgba(255,255,255,0.75); font-size: 1.05rem; margin-bottom: var(--space-2xl); }
+    .cta-buttons { display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; }
+
+    /* Map Section */
+    .map-section { background: white; }
+    .map-wrapper {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      height: 400px;
+    }
+    .map-wrapper iframe { width: 100%; height: 100%; border: none; }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; gap: var(--space-2xl); }
+      .hero h1 { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+      .hero-desc { margin: 0 auto var(--space-xl); }
+      .hero-cta-group, .hero-trust { justify-content: center; }
+      .hero-img-frame { width: 300px; height: 380px; }
+      .hero-floating-card.card-1 { display: none; }
+      .hero-floating-card.card-2 { right: 10px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-us-inner { grid-template-columns: 1fr; }
+      .why-us-img { aspect-ratio: 16/9; order: -1; }
+    }
+    @media (max-width: 600px) {
+      .hero { min-height: auto; padding: 80px 0 60px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     PAGE LOADER
+     ═══════════════════════════════════ -->
+<div id="page-loader">
+  <div style="text-align:center;">
+    <div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:white;margin-bottom:16px;">S.N Dental Clinic</div>
+    <div class="loader-ring"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     NAVBAR
+     ═══════════════════════════════════ -->
+<nav class="navbar transparent" id="navbar" data-transparent="true" role="navigation" aria-label="Main Navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="S.N Dental Clinic Home">
+      <div class="nav-logo-icon">🦷</div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">S.N Dental Clinic</span>
+        <span class="nav-logo-sub">Dr. Srihari · Periodontist</span>
+      </div>
+    </a>
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html" class="nav-link" id="nav-home">Home</a>
+      <a href="pages/about.html" class="nav-link" id="nav-about">About</a>
+      <a href="pages/services.html" class="nav-link" id="nav-services">Services</a>
+      <a href="pages/gallery.html" class="nav-link" id="nav-gallery">Gallery</a>
+      <a href="pages/testimonials.html" class="nav-link" id="nav-testimonials">Testimonials</a>
+      <a href="pages/blog.html" class="nav-link" id="nav-blog">Blog</a>
+      <a href="pages/contact.html" class="nav-link" id="nav-contact">Contact</a>
+      <a href="pages/appointment.html" class="nav-link nav-cta" id="nav-appointment">📅 Book Appointment</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════
+     HERO SECTION
+     ═══════════════════════════════════ -->
+<section class="hero" id="home" aria-label="Hero section">
+  <div class="hero-dots"></div>
+  <div class="hero-gradient-orb orb-1"></div>
+  <div class="hero-gradient-orb orb-2"></div>
+
+  <div class="container">
+    <div class="hero-inner">
+      <!-- Left Content -->
+      <div class="hero-content">
+        <div class="hero-badge hero-title-anim">
+          <span class="pulse-dot"></span>
+          Trusted by 5000+ Patients · Coimbatore
+        </div>
+
+        <h1 class="hero-title-anim">
+          Your Smile Deserves<br>
+          <span class="highlight">Expert Care</span> &<br>
+          Gentle Touch
+        </h1>
+
+        <p class="hero-desc hero-subtitle-anim">
+          Dr. Srihari — Specialist Periodontist with <strong>25+ years</strong> of expertise in dental implants, periodontal surgery, and comprehensive dental care at R.S. Puram, Coimbatore.
+        </p>
+
+        <div class="hero-cta-group hero-cta-anim">
+          <a href="pages/appointment.html" class="btn btn-primary btn-lg" id="hero-book-btn">
+            <i class="fas fa-calendar-check"></i> Book Appointment
+          </a>
+          <a href="https://wa.me/919843022094?text=Hi%20Dr.%20Srihari%2C%20I'd%20like%20to%20book%20a%20consultation." target="_blank" class="btn btn-whatsapp" id="hero-whatsapp-btn">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </a>
+          <a href="tel:+919843022094" class="btn btn-ghost" id="hero-call-btn">
+            <i class="fas fa-phone"></i> Call Clinic
+          </a>
+        </div>
+
+        <div class="hero-trust hero-cta-anim">
+          <div class="trust-item">
+            <i class="fas fa-shield-alt"></i>
+            <span>MDS · BDS Qualified</span>
+          </div>
+          <div class="trust-item">
+            <i class="fas fa-star" style="color:#F59E0B"></i>
+            <span>100/100 Rating</span>
+          </div>
+          <div class="trust-item">
+            <i class="fas fa-clock"></i>
+            <span>Emergency Care</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Image -->
+      <div class="hero-img-side hero-img-anim">
+        <div class="hero-img-frame">
+          <div class="hero-img-bg"></div>
+          <img src="images/doctor_portrait.png" alt="Dr. Srihari — Specialist Periodontist" loading="eager">
+
+          <div class="hero-floating-card card-1">
+            <span class="hero-card-icon">🏆</span>
+            <div class="hero-card-text">
+              <strong>25+ Years</strong>
+              <span>of Experience</span>
+            </div>
+          </div>
+
+          <div class="hero-floating-card card-2">
+            <span class="hero-card-icon">⭐</span>
+            <div class="hero-card-text">
+              <strong>100/100 Rating</strong>
+              <span>11 Reviews</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     STATS SECTION
+     ═══════════════════════════════════ -->
+<section class="stats-section" id="stats" aria-label="Statistics">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-number">
+          <span class="counter" data-counter data-target="5000" data-suffix="+">0</span>
+        </div>
+        <div class="stat-label">Happy Patients</div>
+      </div>
+      <div class="stat-card reveal delay-1">
+        <div class="stat-number">
+          <span class="counter" data-counter data-target="25" data-suffix="+">0</span>
+        </div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-card reveal delay-2">
+        <div class="stat-number">
+          <span class="counter" data-counter data-target="12000" data-suffix="+">0</span>
+        </div>
+        <div class="stat-label">Treatments Done</div>
+      </div>
+      <div class="stat-card reveal delay-3">
+        <div class="stat-number">
+          <span class="counter" data-counter data-target="100" data-suffix="/100">0</span>
+        </div>
+        <div class="stat-label">Patient Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SERVICES SECTION
+     ═══════════════════════════════════ -->
+<section class="section services-section" id="services" aria-label="Our Services">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">
+        <i class="fas fa-tooth"></i> What We Offer
+      </span>
+      <h2 class="section-title">Comprehensive <span>Dental Services</span></h2>
+      <p class="section-subtitle">From routine check-ups to advanced periodontal surgery — we provide complete dental care under one roof.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="service-card reveal delay-1">
+        <div class="service-icon"><i class="fas fa-tooth" style="color:var(--primary)"></i></div>
+        <h3>Dental Implants</h3>
+        <p>Permanent tooth replacement solutions using the latest implant technology for a natural look and feel.</p>
+        <div class="service-price">Starting ₹15,000</div>
+        <a href="pages/services.html#implants" class="btn btn-secondary btn-sm mt-md">Learn More →</a>
+      </div>
+      <div class="service-card reveal delay-2">
+        <div class="service-icon"><i class="fas fa-teeth-open" style="color:var(--primary)"></i></div>
+        <h3>Periodontal Surgery</h3>
+        <p>Specialized gum disease treatment including periodontal flap surgery for deep tissue healing.</p>
+        <div class="service-price">Starting ₹5,000</div>
+        <a href="pages/services.html#perio" class="btn btn-secondary btn-sm mt-md">Learn More →</a>
+      </div>
+      <div class="service-card reveal delay-3">
+        <div class="service-icon"><i class="fas fa-smile" style="color:var(--primary)"></i></div>
+        <h3>Teeth Whitening</h3>
+        <p>Professional whitening treatments for a brighter, more confident smile in just one visit.</p>
+        <div class="service-price">Starting ₹3,000</div>
+        <a href="pages/services.html#whitening" class="btn btn-secondary btn-sm mt-md">Learn More →</a>
+      </div>
+      <div class="service-card reveal delay-1">
+        <div class="service-icon"><i class="fas fa-magic" style="color:var(--primary)"></i></div>
+        <h3>Braces & Aligners</h3>
+        <p>Metal braces and clear aligner options to straighten teeth and correct bite issues comfortably.</p>
+        <div class="service-price">Starting ₹20,000</div>
+        <a href="pages/services.html#braces" class="btn btn-secondary btn-sm mt-md">Learn More →</a>
+      </div>
+      <div class="service-card reveal delay-2">
+        <div class="service-icon"><i class="fas fa-crown" style="color:var(--primary)"></i></div>
+        <h3>Crowns & Bridges</h3>
+        <p>Ceramic and zirconia crowns that restore damaged teeth with precision and aesthetic excellence.</p>
+        <div class="service-price">Starting ₹4,000</div>
+        <a href="pages/services.html#crowns" class="btn btn-secondary btn-sm mt-md">Learn More →</a>
+      </div>
+      <div class="service-card reveal delay-3">
+        <div class="service-icon"><i class="fas fa-first-aid" style="color:var(--primary)"></i></div>
+        <h3>Emergency Dental Care</h3>
+        <p>Immediate relief for toothache, broken teeth, and dental emergencies during clinic hours.</p>
+        <div class="service-price">Consultation ₹200</div>
+        <a href="pages/services.html#emergency" class="btn btn-secondary btn-sm mt-md">Learn More →</a>
+      </div>
+    </div>
+
+    <div class="text-center mt-lg reveal">
+      <a href="pages/services.html" class="btn btn-primary">View All Services <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     WHY CHOOSE US
+     ═══════════════════════════════════ -->
+<section class="section why-us-section" id="why-us" aria-label="Why choose us">
+  <div class="container">
+    <div class="why-us-inner">
+      <!-- Image -->
+      <div class="why-us-img reveal-left">
+        <img src="images/clinic_interior.png" alt="S.N Dental Clinic interior — modern dental equipment" loading="lazy">
+        <div class="why-us-badge">
+          <div class="rating">⭐ 100/100</div>
+          <div style="font-size:0.78rem;color:var(--text-light);margin-top:2px;">Practo Verified Rating</div>
+          <div style="font-size:0.72rem;color:var(--text-muted);">11 verified reviews</div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="reveal-right">
+        <span class="section-tag">
+          <i class="fas fa-award"></i> Why Choose Us
+        </span>
+        <h2 class="section-title mt-md">
+          Care You Can <span>Trust</span>, Results That <span>Last</span>
+        </h2>
+        <p class="section-subtitle" style="max-width:100%;margin:0;">
+          With over 25 years of specialized experience, Dr. Srihari brings precision, compassion, and the latest techniques to every patient.
+        </p>
+
+        <div class="why-features">
+          <div class="why-feature-item reveal">
+            <div class="why-feature-icon"><i class="fas fa-user-md" style="color:var(--primary)"></i></div>
+            <div class="why-feature-content">
+              <h4>Expert Specialist</h4>
+              <p>MDS in Periodontology & Oral Implantology from Rajah Muthiah Dental College, Annamalai University. Member of IDA & Indian Society of Periodontology.</p>
+            </div>
+          </div>
+          <div class="why-feature-item reveal delay-1">
+            <div class="why-feature-icon"><i class="fas fa-microscope" style="color:var(--primary)"></i></div>
+            <div class="why-feature-content">
+              <h4>Modern Equipment</h4>
+              <p>Fully equipped with the latest dental technology ensuring precise diagnostics and comfortable treatments.</p>
+            </div>
+          </div>
+          <div class="why-feature-item reveal delay-2">
+            <div class="why-feature-icon"><i class="fas fa-hand-holding-heart" style="color:var(--primary)"></i></div>
+            <div class="why-feature-content">
+              <h4>Patient-First Approach</h4>
+              <p>Every treatment plan is personalized. We take time to explain procedures and ensure you're comfortable throughout.</p>
+            </div>
+          </div>
+          <div class="why-feature-item reveal delay-3">
+            <div class="why-feature-icon"><i class="fas fa-rupee-sign" style="color:var(--primary)"></i></div>
+            <div class="why-feature-content">
+              <h4>Affordable Treatment</h4>
+              <p>Premium dental care at reasonable prices. Transparent pricing with no hidden charges.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:var(--space-xl);">
+          <a href="pages/about.html" class="btn btn-primary">Meet Dr. Srihari <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     TESTIMONIALS
+     ═══════════════════════════════════ -->
+<section class="section testimonials-section" id="testimonials" aria-label="Patient Testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag"><i class="fas fa-comment-medical"></i> Patient Reviews</span>
+      <h2 class="section-title">What Our <span>Patients</span> Say</h2>
+      <p class="section-subtitle">Real stories from real patients who trusted us with their smiles.</p>
+    </div>
+
+    <div class="swiper testimonials-swiper reveal">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <div class="quote-icon">"</div>
+            <p class="testimonial-body">Very professional, very nice treatment care and comfort specialist. Very reasonable right treatment. Both my wife and I are highly satisfied with the service.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">R</div>
+              <div class="testimonial-info">
+                <h4>Rao G.N.</h4>
+                <span>Dental Implant · Nov 2020</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <div class="quote-icon">"</div>
+            <p class="testimonial-body">Would like to recommend... very much satisfied with the service. Got clear and detailed explanation about the illness and treatment. Excellent doctor!</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">S</div>
+              <div class="testimonial-info">
+                <h4>Sumitha</h4>
+                <span>Periodontal Treatment · Feb 2018</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <div class="quote-icon">"</div>
+            <p class="testimonial-body">Great treatment, very friendly and courteous. Explained the treatment process in great detail. Would highly recommend Dr. Srihari to everyone!</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">V</div>
+              <div class="testimonial-info">
+                <h4>Vasantha S.</h4>
+                <span>Teeth Whitening · Jun 2016</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <div class="quote-icon">"</div>
+            <p class="testimonial-body">Dr. Srihari is incredibly skilled and patient. He made me feel at ease throughout my dental implant procedure. The clinic is very clean and well-maintained.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">K</div>
+              <div class="testimonial-info">
+                <h4>Karthik M.</h4>
+                <span>Dental Implants · Mar 2022</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <div class="quote-icon">"</div>
+            <p class="testimonial-body">My daughter's braces treatment went smoothly. Doctor is very approachable and explains everything clearly to both parents and patients. Highly recommended!</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">P</div>
+              <div class="testimonial-info">
+                <h4>Priya N.</h4>
+                <span>Braces Treatment · Aug 2021</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="text-center reveal mt-lg">
+      <a href="pages/testimonials.html" class="btn btn-secondary">Read All Reviews <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     GOOGLE MAPS
+     ═══════════════════════════════════ -->
+<section class="section map-section" id="location" aria-label="Clinic Location">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag"><i class="fas fa-map-marker-alt"></i> Find Us</span>
+      <h2 class="section-title">Visit Our <span>Clinic</span></h2>
+      <p class="section-subtitle">#30, D B Road, Opposite To Rajasthan Sangh, R.S. Puram, Coimbatore – 641002</p>
+    </div>
+    <div class="map-wrapper reveal">
+      <iframe
+        title="S.N Dental Clinic Location on Google Maps"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.394792874178!2d76.94813657496793!3d11.011399489026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8590b3fce81ab%3A0x26dd3474d5afb7e7!2s30%2C%20DB%20Rd%2C%20RS%20Puram%2C%20Coimbatore%2C%20Tamil%20Nadu%20641002!5e0!3m2!1sen!2sin!4v1719142200000!5m2!1sen!2sin"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <!-- Contact Info below map -->
+    <div class="grid-3 mt-lg">
+      <div class="feature-card reveal delay-1">
+        <div class="feature-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <h3>Our Location</h3>
+        <p>#30, D B Road, Opposite Rajasthan Sangh, R.S. Puram, Coimbatore – 641002</p>
+      </div>
+      <div class="feature-card reveal delay-2">
+        <div class="feature-icon"><i class="fas fa-clock"></i></div>
+        <h3>Working Hours</h3>
+        <p>Mon–Sat: 9:00 AM – 1:00 PM<br>Mon–Sat: 4:00 PM – 8:00 PM<br><strong>Sunday: Closed</strong></p>
+      </div>
+      <div class="feature-card reveal delay-3">
+        <div class="feature-icon"><i class="fas fa-phone-alt"></i></div>
+        <h3>Contact Us</h3>
+        <p>
+          <a href="tel:+919843022094" style="color:var(--primary);font-weight:600;">+91 98430 22094</a><br>
+          <a href="mailto:drsrihari@sndental.in" style="color:var(--primary);font-weight:600;">drsrihari@sndental.in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CTA SECTION
+     ═══════════════════════════════════ -->
+<section class="cta-section" id="book-cta" aria-label="Call to action — Book appointment">
+  <div class="container">
+    <div class="cta-section-inner reveal">
+      <div class="section-tag" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.9);display:inline-flex;margin-bottom:var(--space-md);">
+        <i class="fas fa-calendar-star"></i> Ready to Get Started?
+      </div>
+      <h2>Book Your Appointment Today</h2>
+      <p>Don't wait for dental problems to worsen. Schedule a consultation with Dr. Srihari and take the first step toward a healthier, beautiful smile.</p>
+      <div class="cta-buttons">
+        <a href="pages/appointment.html" class="btn btn-primary btn-lg" id="cta-book-btn">
+          <i class="fas fa-calendar-check"></i> Book Appointment
+        </a>
+        <a href="https://wa.me/919843022094?text=Hi%20Dr.%20Srihari%2C%20I%27d%20like%20to%20book%20an%20appointment%20at%20S.N%20Dental%20Clinic." target="_blank" class="btn btn-whatsapp btn-lg" id="cta-wa-btn">
+          <i class="fab fa-whatsapp"></i> WhatsApp Us
+        </a>
+        <a href="tel:+919843022094" class="btn btn-ghost btn-lg" id="cta-call-btn">
+          <i class="fas fa-phone"></i> Call: 98430 22094
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:var(--space-md);">
+          <div style="width:40px;height:40px;background:var(--gradient-primary);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🦷</div>
+          <div class="footer-logo-name">S.N Dental Clinic</div>
+        </div>
+        <p>Your trusted dental care partner in Coimbatore. Dr. Srihari brings 25+ years of specialized expertise in periodontal care and dental implants.</p>
+        <div class="footer-social" aria-label="Social media links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://wa.me/919843022094" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.practo.com/coimbatore/doctor/dr-srihari-5-dentist" aria-label="Practo Profile" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+          <a href="pages/about.html"><i class="fas fa-chevron-right"></i> About Dr. Srihari</a>
+          <a href="pages/services.html"><i class="fas fa-chevron-right"></i> Our Services</a>
+          <a href="pages/gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a>
+          <a href="pages/blog.html"><i class="fas fa-chevron-right"></i> Blog</a>
+          <a href="pages/appointment.html"><i class="fas fa-chevron-right"></i> Book Appointment</a>
+        </nav>
+      </div>
+
+      <div>
+        <div class="footer-heading">Services</div>
+        <nav class="footer-links" aria-label="Services links">
+          <a href="pages/services.html#implants"><i class="fas fa-chevron-right"></i> Dental Implants</a>
+          <a href="pages/services.html#perio"><i class="fas fa-chevron-right"></i> Periodontal Surgery</a>
+          <a href="pages/services.html#whitening"><i class="fas fa-chevron-right"></i> Teeth Whitening</a>
+          <a href="pages/services.html#braces"><i class="fas fa-chevron-right"></i> Braces & Aligners</a>
+          <a href="pages/services.html#crowns"><i class="fas fa-chevron-right"></i> Crowns & Bridges</a>
+          <a href="pages/services.html#emergency"><i class="fas fa-chevron-right"></i> Emergency Care</a>
+        </nav>
+      </div>
+
+      <div>
+        <div class="footer-heading">Contact</div>
+        <div class="footer-contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>#30, D B Road, Opp. Rajasthan Sangh, R.S. Puram, Coimbatore – 641002</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+919843022094">+91 98430 22094</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fab fa-whatsapp"></i>
+          <a href="https://wa.me/919843022094" target="_blank">WhatsApp Chat</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:drsrihari@sndental.in">drsrihari@sndental.in</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Mon–Sat: 9AM–1PM, 4PM–8PM</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2024 S.N Dental Clinic. All rights reserved. | Designed with ❤️ for Dr. Srihari</p>
+      <p>
+        <a href="pages/privacy.html">Privacy Policy</a> ·
+        <a href="pages/terms.html">Terms of Use</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════
+     WHATSAPP FLOATING
+     ═══════════════════════════════════ -->
+<div class="whatsapp-float" aria-label="WhatsApp Chat Widget">
+  <!-- Chat Widget -->
+  <div class="wa-chat-widget" id="waWidget" role="dialog" aria-label="WhatsApp chat with clinic">
+    <div class="wa-chat-header">
+      <div class="wa-chat-avatar">🦷</div>
+      <div>
+        <div class="wa-chat-name">S.N Dental Clinic</div>
+        <div class="wa-chat-status">Typically replies within minutes</div>
+      </div>
+      <button class="wa-chat-close" id="waClose" aria-label="Close WhatsApp chat">✕</button>
+    </div>
+    <div class="wa-chat-messages" id="waMessages"></div>
+    <div class="wa-chat-options" id="waOptions"></div>
+    <a class="wa-open-link" id="waOpenLink" target="_blank" style="display:none;"
+       href="https://wa.me/919843022094?text=Hi%20Dr.%20Srihari%2C%20I%27d%20like%20to%20book%20an%20appointment.">
+      <i class="fab fa-whatsapp"></i> Open WhatsApp
+    </a>
+  </div>
+
+  <!-- Float Button -->
+  <button class="whatsapp-btn" id="waBtn" aria-label="Open WhatsApp chat with clinic">
+    <i class="fab fa-whatsapp"></i>
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════
+     BACK TO TOP
+     ═══════════════════════════════════ -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- ═══════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Testimonials Swiper
+  new Swiper('.testimonials-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 24,
+    loop: true,
+    autoplay: { delay: 5000, disableOnInteraction: false },
+    pagination: { el: '.swiper-pagination', clickable: true },
+    breakpoints: {
+      640:  { slidesPerView: 1 },
+      768:  { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    }
+  });
+</script>
+</body>
+</html>
+
+

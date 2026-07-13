@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Allow: /pages/
+Disallow: /admin/
+Disallow: /functions/
+Disallow: /js/admin/
+
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# S.N Dental Clinic — Dr. Srihari, R.S. Puram, Coimbatore
