@@ -7,10 +7,16 @@
     "start": "node api/index.js",
     "dev": "node --watch api/index.js"
   },
-  "keywords": ["dental", "clinic", "coimbatore", "periodontist"],
+  "keywords": [
+    "dental",
+    "clinic",
+    "coimbatore",
+    "periodontist"
+  ],
   "author": "S.N Dental Clinic — Dr. Srihari",
   "license": "ISC",
   "dependencies": {
+    "@vercel/speed-insights": "^2.0.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "uuid": "^14.0.1"
