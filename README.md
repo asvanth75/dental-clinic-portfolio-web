@@ -1,61 +1,43 @@
-# side-channel <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
+# unpipe
 
-[![github actions][actions-image]][actions-url]
-[![coverage][codecov-image]][codecov-url]
-[![License][license-image]][license-url]
-[![Downloads][downloads-image]][downloads-url]
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
+[![Node.js Version][node-image]][node-url]
+[![Build Status][travis-image]][travis-url]
+[![Test Coverage][coveralls-image]][coveralls-url]
 
-[![npm badge][npm-badge-png]][package-url]
+Unpipe a stream from all destinations.
 
-Store information about any JS value in a side channel. Uses WeakMap if available.
-
-Warning: in an environment that lacks `WeakMap`, this implementation will leak memory until you `delete` the `key`.
-
-## Getting started
+## Installation
 
 ```sh
-npm install --save side-channel
+$ npm install unpipe
 ```
 
-## Usage/Examples
+## API
 
 ```js
-const assert = require('assert');
-const getSideChannel = require('side-channel');
-
-const channel = getSideChannel();
-
-const key = {};
-assert.equal(channel.has(key), false);
-assert.throws(() => channel.assert(key), TypeError);
-
-channel.set(key, 42);
-
-channel.assert(key); // does not throw
-assert.equal(channel.has(key), true);
-assert.equal(channel.get(key), 42);
-
-channel.delete(key);
-assert.equal(channel.has(key), false);
-assert.throws(() => channel.assert(key), TypeError);
+var unpipe = require('unpipe')
 ```
 
-## Tests
+### unpipe(stream)
 
-Clone the repo, `npm install`, and run `npm test`
+Unpipes all destinations from a given stream. With stream 2+, this is
+equivalent to `stream.unpipe()`. When used with streams 1 style streams
+(typically Node.js 0.8 and below), this module attempts to undo the
+actions done in `stream.pipe(dest)`.
 
-[package-url]: https://npmjs.org/package/side-channel
-[npm-version-svg]: https://versionbadg.es/ljharb/side-channel.svg
-[deps-svg]: https://david-dm.org/ljharb/side-channel.svg
-[deps-url]: https://david-dm.org/ljharb/side-channel
-[dev-deps-svg]: https://david-dm.org/ljharb/side-channel/dev-status.svg
-[dev-deps-url]: https://david-dm.org/ljharb/side-channel#info=devDependencies
-[npm-badge-png]: https://nodei.co/npm/side-channel.png?downloads=true&stars=true
-[license-image]: https://img.shields.io/npm/l/side-channel.svg
-[license-url]: LICENSE
-[downloads-image]: https://img.shields.io/npm/dm/side-channel.svg
-[downloads-url]: https://npm-stat.com/charts.html?package=side-channel
-[codecov-image]: https://codecov.io/gh/ljharb/side-channel/branch/main/graphs/badge.svg
-[codecov-url]: https://app.codecov.io/gh/ljharb/side-channel/
-[actions-image]: https://img.shields.io/github/check-runs/ljharb/side-channel/main
-[actions-url]: https://github.com/ljharb/side-channel/actions
+## License
+
+[MIT](LICENSE)
+
+[npm-image]: https://img.shields.io/npm/v/unpipe.svg
+[npm-url]: https://npmjs.org/package/unpipe
+[node-image]: https://img.shields.io/node/v/unpipe.svg
+[node-url]: http://nodejs.org/download/
+[travis-image]: https://img.shields.io/travis/stream-utils/unpipe.svg
+[travis-url]: https://travis-ci.org/stream-utils/unpipe
+[coveralls-image]: https://img.shields.io/coveralls/stream-utils/unpipe.svg
+[coveralls-url]: https://coveralls.io/r/stream-utils/unpipe?branch=master
+[downloads-image]: https://img.shields.io/npm/dm/unpipe.svg
+[downloads-url]: https://npmjs.org/package/unpipe
