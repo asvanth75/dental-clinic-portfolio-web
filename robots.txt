@@ -2,9 +2,9 @@ User-agent: *
 Allow: /
 Allow: /pages/
 Disallow: /admin/
-Disallow: /functions/
-Disallow: /js/admin/
+Disallow: /data/
+Disallow: /node_modules/
 
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://dental-clinic-portfolio-web.vercel.app/sitemap.xml
 
-# S.N Dental Clinic — Dr. Srihari, R.S. Puram, Coimbatore
+# S.N Dental Clinic -- Dr. Srihari, R.S. Puram, Coimbatore
