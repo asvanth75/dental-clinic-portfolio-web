@@ -1,46 +1,95 @@
-# has-symbols <sup>[![Version Badge][2]][1]</sup>
+# 🦷 S.N Dental Clinic — Dr. Srihari
 
-[![github actions][actions-image]][actions-url]
-[![coverage][codecov-image]][codecov-url]
-[![dependency status][5]][6]
-[![dev dependency status][7]][8]
-[![License][license-image]][license-url]
-[![Downloads][downloads-image]][downloads-url]
+> Professional dental clinic portfolio website for **Dr. Srihari**, MDS Periodontist with 25+ years of experience at **S.N Dental Clinic**, R.S. Puram, Coimbatore.
 
-[![npm badge][11]][1]
+🌐 **Live:** [dental-clinic-portfolio-web.vercel.app](https://dental-clinic-portfolio-web.vercel.app)
 
-Determine if the JS environment has Symbol support. Supports spec, or shams.
+---
 
-## Example
+## 📁 Project Structure
 
-```js
-var hasSymbols = require('has-symbols');
-
-hasSymbols() === true; // if the environment has native Symbol support. Not polyfillable, not forgeable.
-
-var hasSymbolsKinda = require('has-symbols/shams');
-hasSymbolsKinda() === true; // if the environment has a Symbol sham that mostly follows the spec.
+```
+├── index.html              # Homepage
+├── server.js               # Express.js backend API (port 3001)
+├── package.json
+├── sitemap.xml
+├── robots.txt
+├── firebase.json           # Firebase hosting config
+│
+├── pages/
+│   ├── about.html          # Doctor profile & qualifications
+│   ├── services.html       # 12 dental treatments
+│   ├── gallery.html        # Filterable image gallery
+│   ├── testimonials.html   # Patient reviews
+│   ├── blog.html           # Dental health articles
+│   ├── appointment.html    # 3-step booking wizard
+│   └── contact.html        # Contact form & map
+│
+├── css/
+│   ├── main.css            # Design tokens & typography
+│   ├── components.css      # Navbar, cards, forms, footer
+│   └── animations.css      # Scroll reveals, WhatsApp widget
+│
+├── js/
+│   ├── main.js             # Global logic & WhatsApp bot
+│   ├── api.js              # Frontend API client
+│   └── firebase-config.js  # Firebase + localStorage dual mode
+│
+└── images/
+    ├── hero_bg.png
+    ├── doctor_portrait.png
+    ├── clinic_interior.png
+    └── dental_services.png
 ```
 
-## Supported Symbol shams
- - get-own-property-symbols [npm](https://www.npmjs.com/package/get-own-property-symbols) | [github](https://github.com/WebReflection/get-own-property-symbols)
- - core-js [npm](https://www.npmjs.com/package/core-js) | [github](https://github.com/zloirock/core-js)
+---
 
-## Tests
-Simply clone the repo, `npm install`, and run `npm test`
+## ✨ Features
 
-[1]: https://npmjs.org/package/has-symbols
-[2]: https://versionbadg.es/inspect-js/has-symbols.svg
-[5]: https://david-dm.org/inspect-js/has-symbols.svg
-[6]: https://david-dm.org/inspect-js/has-symbols
-[7]: https://david-dm.org/inspect-js/has-symbols/dev-status.svg
-[8]: https://david-dm.org/inspect-js/has-symbols#info=devDependencies
-[11]: https://nodei.co/npm/has-symbols.png?downloads=true&stars=true
-[license-image]: https://img.shields.io/npm/l/has-symbols.svg
-[license-url]: LICENSE
-[downloads-image]: https://img.shields.io/npm/dm/has-symbols.svg
-[downloads-url]: https://npm-stat.com/charts.html?package=has-symbols
-[codecov-image]: https://codecov.io/gh/inspect-js/has-symbols/branch/main/graphs/badge.svg
-[codecov-url]: https://app.codecov.io/gh/inspect-js/has-symbols/
-[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/inspect-js/has-symbols
-[actions-url]: https://github.com/inspect-js/has-symbols/actions
+- **Premium UI** — Glassmorphism, smooth animations, mobile-first responsive design
+- **WhatsApp Bot** — Floating chat widget with appointment booking conversation flow
+- **Appointment System** — 3-step booking wizard with time slot selection
+- **Express Backend** — REST API for appointments & contact messages stored in `data/db.json`
+- **Firebase Ready** — Toggle `FIREBASE_ENABLED = true` in `js/firebase-config.js` to switch from localStorage to Firestore
+- **SEO Optimised** — Schema.org markup, Open Graph, sitemap, robots.txt
+
+---
+
+## 🚀 Running Locally
+
+```bash
+# Install dependencies
+npm install
+
+# Start the server (serves frontend + backend on port 3001)
+npm start
+```
+
+Then open **http://localhost:3001**
+
+---
+
+## 🔑 Clinic Details
+
+| | |
+|--|--|
+| **Doctor** | Dr. Srihari |
+| **Specialisation** | Periodontist & Implantologist |
+| **Qualification** | MDS — Rajah Muthiah Dental College (2001) |
+| **Experience** | 25+ Years |
+| **Phone** | +91 98430 22094 |
+| **Clinic** | S.N Dental Clinic, #30 D.B. Road, R.S. Puram, Coimbatore |
+| **Rating** | 100/100 on Practo ⭐ |
+
+---
+
+## 🌐 Deployment
+
+**Vercel** — Import this repo at [vercel.com](https://vercel.com), set output directory to `.`
+
+**Firebase Hosting:**
+```bash
+npm install -g firebase-tools
+firebase login
+firebase deploy --only hosting
+```
